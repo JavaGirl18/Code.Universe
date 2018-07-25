@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  date: 
+  time: 
+  location: MyString
+  attendee: one
+  organizer: one
+
+two:
+  title: MyString
+  date: 
+  time: 
+  location: MyString
+  attendee: two
+  organizer: two
