@@ -1,6 +1,7 @@
 class Event < ApplicationRecord
   validates :title, :details, :location, :time, presence: true
-  belongs_to :attendee
-  belongs_to :organizer
-  has_many :users, through: :attendee
+  has_many :attendees
+  has_many :users, through: :attendees
+  has_many :organizers
+  has_many :users, through: :organizers
 end
