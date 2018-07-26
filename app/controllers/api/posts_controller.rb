@@ -4,13 +4,13 @@ class Api::PostsController < ApplicationController
         if params[:attendee_id]
             puts "ATTENDEE"
             @event = Event.find(params[:event_id])
-            @attendee= @event.attendees.where(attendee_id: params[:attendee_id])
-            render json: @attendee.posts
+            @attendee= @event.attendees.find(params[:attendee_id]).posts
+            render json: @attendee
         elsif params[:organizer_id]
             puts "ORGANIZER"
             @event = Event.find(params[:event_id])
-            @organizer = @event.organizers.where(organzer_id: params[:organizer_id])
-            render json: @organizer.posts
+            @organizer = @event.organizers.find(params[:organizer_id]).posts
+            render json: @organizer
         else
             puts "DEFAULT"
             @event = Event.find(params[:event_id])
@@ -20,8 +20,10 @@ class Api::PostsController < ApplicationController
     end
 
     def show
-        @post = Post.find(params[:id])
-        render json: @post
+        @attendee = Event.find(params[:event_id]).attendees.where(attendee_id: params[:attendee_id])
+        # @attendee = Attendee.find(params[:attendee_id])
+        # @post = @attendee.posts
+        render json: @attendee.posts
     end
 
     def create

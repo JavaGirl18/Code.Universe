@@ -7,10 +7,15 @@ def index
 end
 
 def show
-    @attendee = Attendee.find(params[:id])
-    render json: @attendee
+    @event = Event.find(params[:event_id])
+    @attendee = @event.attendees.find(params[:id])
+  render json:@attendee
 end
 
 
 
 end
+
+# @user = User.find(params[:id])
+# @posts= @user.posts
+# render json: {user:@user, posts:@posts}
