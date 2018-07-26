@@ -32,6 +32,11 @@ class Api::PostsController < ApplicationController
     render json: @post
     end
 
+    def destroy
+        @post = Post.find(params[:id])
+        render status: :ok
+    end
+
 private 
 def post_params
 params.require(:post).permit(:title, :comment, :attendee_id, :organizer_id)

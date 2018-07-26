@@ -4,5 +4,5 @@ class Event < ApplicationRecord
   has_many :users, through: :attendees
   has_many :organizers
   has_many :users, through: :organizers
-  has_many :posts
+  has_many :posts, dependent: :destroy
 end
