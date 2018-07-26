@@ -4,6 +4,6 @@ class ChangeNumberTypeInUser < ActiveRecord::Migration[5.2]
   end
  
   def self.down
-    change_column :users, :dnumber, :integer
+    change_column :users, :number, :integer
 end
 end

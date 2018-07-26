@@ -1,3 +1,16 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  namespace :api do
+    resources :users 
+
+    resources :events do
+      resources :organizers do
+        resources :posts
+      end
+    end
+    resources :events do
+      resources :attendees do
+        resources :posts 
+      end
+    end  
+  end 
 end
