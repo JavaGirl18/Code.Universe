@@ -22,13 +22,7 @@ class Api::EventsController < ApplicationController
             end
             render json: {event:@event, organizers: @organizers, posts:@posts}
 
-            # @event = Event.find(params[:id])
-            # @organizers = @event.users
-            # @posts = @event.posts
-            # @posts= Post.find(params[:id])
-            # @organizerPosts = posts.organizer
-            # @attendeePosts = posts.attendee
-            # render json: {event:@event, organizers: @organizers, posts:@posts}
+          
         end
     
         def create

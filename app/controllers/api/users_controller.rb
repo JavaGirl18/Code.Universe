@@ -7,7 +7,20 @@ class Api::UsersController < ApplicationController
     
     def show
         @user = User.find(params[:id])
-        render json:@user
+        @events = @user.events
+        @userEvents = @user.events.map do |event|
+            every_event = {
+                id: event.id,
+                title: event.title,
+                location:event.location,
+                time:event.time,
+                details: event.details
+            }
+            # every_event[:attendee] = event.organizer.user if event.attendee_id
+            # every_event[:organizer] = event.organizer.user  if event.organizer_id
+            every_event
+        end
+        render json:{user: @user, events: @userEvents}
     end
 
     def create

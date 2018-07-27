@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import axios from 'axios'
 import Events from './components/Events'
 import Event from './components/ShowEvent'
+import User from './components/ShowUser'
 
 import './App.css';
 
@@ -56,6 +57,11 @@ componentDidMount() {
       <Event {...props}/>
       )
     }
+    const ShowUser = (props) => {
+      return(
+      <User {...props}/>
+      )
+    }
 
     return (
       <Router>
@@ -65,6 +71,7 @@ componentDidMount() {
             <Route exact path='/' render={HomePage}/>
             <Route exact path ='/events' render={EventsPage}/>
             <Route exact path ='/events/:eventId' render={ShowEvent}/>
+            <Route exact path ='/users/:userId' render={ShowUser}/>
         </Switch>
         </div>
       </Router>
