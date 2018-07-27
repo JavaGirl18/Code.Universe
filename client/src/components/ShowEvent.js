@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import styled from 'styled-components'
 
+const FlexBox = styled.div`
+display: flex;
+j
+
+`
 class ShowEvent extends Component {
     state = {
         event: {},
@@ -64,12 +70,12 @@ class ShowEvent extends Component {
             // const eachPost = `/events/${eventId}/organizers/${organizerId}`
             return (
                 <div>
-                    <ul>
-                            {post.organizer && post.organizer.name}
-                            {post.attendee && post.attendee.name}
-                            {post.title}
-                            {post.comment}
-                    </ul>
+                    {/* <ul> */}
+                           <p> {post.organizer  &&  post.organizer.name} </p> 
+                           <p> {post.attendee && post.attendee.name}</p>
+                           <p> {post.title}</p>
+                           <p> {post.comment} </p>
+                    {/* </ul> */}
 
                 </div>
             )
@@ -92,15 +98,18 @@ class ShowEvent extends Component {
         return (
            
             <div>
+    {this.state.event.title}
+               <hr></hr>
+              <h4> Organizers: </h4>{organizerlist}
+            
+               <p>Location: {this.state.event.location}</p>
+                <FlexBox>
+                <p>Date: {this.state.event.date} Time: </p>
 
-                {postlist}
-                {organizerlist}
-                {this.state.event.title}
-                {this.state.event.location}
-                {this.state.event.date}
-                {this.state.event.time}
-                {this.state.event.details}
-
+              <p> {this.state.event.time }</p>
+              </FlexBox>
+              <p> Details: {this.state.event.details}</p>
+ {postlist}
 
             </div>
         );
