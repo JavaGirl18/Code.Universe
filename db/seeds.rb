@@ -26,14 +26,14 @@ user10 = User.create!(name:"php boy", email:"lovelovelove@gmail.com", number:"51
 user11 = User.create!(name:"nodeJs boy", email:"codears@gmail.com", number:"2403856788", password:"rubygirl010")
 user12 = User.create!(name:"cSharp boy", email:"coderocks@gmail.com", number:"2023856788", password:"rubygirl11")
 
-event1 = Event.create!(title:'Women Who Code',date:10/01/2018 , details:"Come and network with other women in tech",location:"Ponce City Market", time:'2:00')
-event2 = Event.create!(title:'Lunch and Learn with Jamie',date:02/15/2019,details:"Jamie King, General Assembly WDI instructor talks about stuff", time:'6:00' ,location:"Ponce City Market")
-event3 = Event.create!(title:'Ted Talk - GraphicQL',date:11/11/2018 , details:"Hosted by Guys who knows stuff", location:"Georgia Tech", time:'7:30')
-event4 = Event.create!(title:'Ruby MeetUp',date:9/11/2018 ,details:"Let's talk Ruby", location:"Ponce City Market", time:'5:00')
-event5 = Event.create!(title:'General Assembly WDI ALumni Event',date:11/11/2018 ,details:"COme all WDI Alumni, let's party", location:"Ponce City Market", time:'7:00')
-event6 = Event.create!(title:'Hackathon',date:01/11/2019 ,details:"Let's code" , location:"Ponce City Market", time:'6:30')
-event7 = Event.create!(title:'Full Stack Meetup',date:03/15/2019 ,details:"Let's meet up", location:"Ponce City Market", time:'5:30')
-event8 = Event.create!(title:'Men who code',date:04/11/2019 , details: "Let's code dude", location:"Ponce City Market", time:'7:00')
+event1 = Event.create!(title:'Women Who Code',date:"10/01/2018" , details:"Come and network with other women in tech",location:"Ponce City Market", time:'2:00')
+event2 = Event.create!(title:'Lunch and Learn with Jamie',date:"02/15/2019",details:"Jamie King, General Assembly WDI instructor talks about stuff", time:'6:00' ,location:"Ponce City Market")
+event3 = Event.create!(title:'Ted Talk - GraphicQL',date:"11/11/2018" , details:"Hosted by Guys who knows stuff", location:"Georgia Tech", time:'7:30')
+event4 = Event.create!(title:'Ruby MeetUp',date:"9/11/2018" ,details:"Let's talk Ruby", location:"Ponce City Market", time:'5:00')
+event5 = Event.create!(title:'General Assembly WDI ALumni Event',date:"11/11/2018" ,details:"COme all WDI Alumni, let's party", location:"Ponce City Market", time:'7:00')
+event6 = Event.create!(title:'Hackathon',date:"01/11/2019" ,details:"Let's code" , location:"Ponce City Market", time:'6:30')
+event7 = Event.create!(title:'Full Stack Meetup',date:"03/15/2019" ,details:"Let's meet up", location:"Ponce City Market", time:'5:30')
+event8 = Event.create!(title:'Men who code',date:"04/11/2019" , details: "Let's code dude", location:"Ponce City Market", time:'7:00')
 
 
 organizer1 = Organizer.create!(event:event1, user: user1)

@@ -7,7 +7,28 @@ class Api::EventsController < ApplicationController
         
         def show
             @event = Event.find(params[:id])
-            render json: @event
+            @organizers = @event.users
+            @posts = @event.posts.map do |post|
+                custom_post = {
+                    id: post.id,
+                    comment: post.comment,
+                    title: post.title,
+                }
+                puts post.inspect
+                custom_post[:attendee] = post.attendee.user if post.attendee_id
+                custom_post[:organizer] = post.organizer.user if post.organizer_id
+
+                custom_post
+            end
+            render json: {event:@event, organizers: @organizers, posts:@posts}
+
+            # @event = Event.find(params[:id])
+            # @organizers = @event.users
+            # @posts = @event.posts
+            # @posts= Post.find(params[:id])
+            # @organizerPosts = posts.organizer
+            # @attendeePosts = posts.attendee
+            # render json: {event:@event, organizers: @organizers, posts:@posts}
         end
     
         def create

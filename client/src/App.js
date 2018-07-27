@@ -1,19 +1,73 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import {BrowserRouter as Router, Route, Link,Switch} from "react-router-dom";
+import Home from './components/HomePage'
+import Nav from './components/NavBar'
+import styled from 'styled-components'
+import axios from 'axios'
+import Events from './components/Events'
+import Event from './components/ShowEvent'
+
 import './App.css';
 
+
+
+
 class App extends Component {
+
+  state={
+    users:[]
+}
+
+componentDidMount() {
+    this.getUsers()
+  }
+
+  getUsers = async () => {
+    try {
+      const res = await axios.get('/api/users');
+      this.setState({ users: res.data });
+    }
+    catch (err) {
+      console.log(err)
+      await this.setState({ error: err.message })
+      return err.message
+    }
+  }
+
+
   render() {
+    const HomePage = (props) => {
+      return (
+        <Home {...props} />
+      )
+    }
+    const NavBar = (props) =>{
+      return (
+    <Nav {...props} />
+      )
+    }
+    const EventsPage = (props) => {
+      return(
+      <Events {...props}/>
+      )
+    }
+    const ShowEvent = (props) => {
+      return(
+      <Event {...props}/>
+      )
+    }
+
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <Router>
+        <div>
+          <NavBar/>
+        <Switch>
+            <Route exact path='/' render={HomePage}/>
+            <Route exact path ='/events' render={EventsPage}/>
+            <Route exact path ='/events/:eventId' render={ShowEvent}/>
+        </Switch>
+        </div>
+      </Router>
     );
   }
 }
