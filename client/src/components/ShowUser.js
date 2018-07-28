@@ -11,44 +11,58 @@ flex-wrap:wrap;
 
 `
 class ShowUser extends Component {
-state={
-    user: {},
-    events:[],
-    organizerEvents:[],
-    attendeeEvents:[]
-}
+    state = {
+        user: {},
+        events: [],
+        organizerEvents: [],
+        attendeeEvents: []
+    }
 
 
 
-componentDidMount() {
+    componentDidMount() {
 
-    // this.props.getProject(projectId)
+        // this.props.getProject(projectId)
 
-    if (this.props.match.params) {
-        // console.log("PROPS", this.props)
-        const userId = this.props.match.params.userId
-        this.getUser(userId)
-        console.log(userId)
+        if (this.props.match.params) {
+            // console.log("PROPS", this.props)
+            const userId = this.props.match.params.userId
+         
+            this.getUser(userId)
+            console.log(userId)
+
+        }
+    }
+
+
+    getUser = (userId) => {
+        axios.get(`/api/users/${userId}`)
+            .then(res => {
+                console.log("response from api", res.data)
+                this.setState({ user: res.data.user, events: res.data.events, organizerEvents: res.data.organizer_events, attendeeEvents: res.data.attendee_events })
+                console.log(this.state)
+
+            })
+            .catch((err) => {
+                console.error(err)
+            })
 
     }
-}
 
-
-getUser = (userId) => {
-    axios.get(`/api/users/${userId}`)
-        .then(res => {
-            console.log("response from api", res.data)
-            this.setState({ user:res.data.user, events:res.data.events, organizerEvents:res.data.organizer_events, attendeeEvents:res.data.attendee_events})
-            console.log(this.state)
-
+    deleteEvent = () => {
+   const orgEventId =this.state.organizerEvents.id
+   console.log(this.state.organizerEvents._id)
+        //make a delete request to our copy of the api using the params to identify specific idea
+        axios.delete(`/api/events/${orgEventId}`).then((res) => {   
+            //setstate
+            this.setState({
+                //data matching user will be removed from the state.user
+                organizerEvents: res.data
+              
+            })
+            // this.getUsers()
         })
-        .catch((err) => {
-            console.error(err)
-        })
-
-}
-
-
+    }
 
     render() {
 
@@ -63,22 +77,39 @@ getUser = (userId) => {
                         {/* <Link to={eachOrganizer}> {organizer.name} </Link> */}
                         {event.title}
                     </ul>
-                    </div>
+                </div>
             )
         })
 
         // const eventId = this.props.match.eventId
         const organizerEvents = this.state.organizerEvents.map((orgEvent, index) => {
-            // const eventId = event.id
-            // const eachEvent = `/events/${eventId}/organizers/${organizerId}`
+            const eventId = orgEvent.id
+            const eachEvent = `/events/${eventId}`
             return (
                 <div key={index}>
 
                     <ul>
-                        {/* <Link to={eachOrganizer}> {organizer.name} </Link> */}
-                        {orgEvent.title}
+
+                        <Card.Group>
+                            <Card>
+                                <Card.Content>
+                                <i class='thumbtack icon'/>
+                                    <Link to=''> <Card.Header>{orgEvent.title}</Card.Header></Link>
+                                    <Card.Meta>{orgEvent.date}</Card.Meta>
+                                    {/* <Card.Description>
+                  Steve wants to add you to the group <strong>best friends</strong>
+                </Card.Description> */}
+                                    <Card.Content extra>
+                                        <div className='ui two buttons'>
+                                            <Link to={eachEvent}><Button basic color='green'>View</Button></Link>
+                                            <Button basic color='red' onClick={() => this.deleteEvent(this.state.organizerEvents[index].eventId)}>Cancel Event</Button>
+                                        </div>
+                                    </Card.Content>
+                                </Card.Content>
+                            </Card>
+                        </Card.Group>
                     </ul>
-                    </div>
+                </div>
             )
         })
 
@@ -91,42 +122,44 @@ getUser = (userId) => {
                     <ul>
                         {/* <Link to={eachOrganizer}> {organizer.name} </Link> */}
                         <Card.Group>
-            <Card>
-                        <Card.Content>
-                        <Image floated='right' size='mini' src='https://react.semantic-ui.com/images/avatar/large/steve.jpg' />
-                        <Link to={eachEvent}> <Card.Header>{attenEvent.title}</Card.Header></Link>
-                <Card.Meta>{attenEvent.date}</Card.Meta>
-                {/* <Card.Description>
+                            <Card>
+                                <Card.Content>
+                                <i class='thumbtack icon'/>
+                                    <Link to=''> <Card.Header>{attenEvent.title}</Card.Header></Link>
+                                    <Card.Meta>{attenEvent.date}</Card.Meta>
+                                    {/* <Card.Description>
                   Steve wants to add you to the group <strong>best friends</strong>
                 </Card.Description> */}
-                <Card.Content extra>
-        <div className='ui two buttons'>
-         <Link to=''><Button basic color='green'>View</Button></Link>
-         <Link to=''><Button basic color='red'>Remove </Button></Link>
-        </div>
-      </Card.Content>
-                </Card.Content>
-                </Card>
-              </Card.Group>
+                                    <Card.Content extra>
+                                        <div className='ui two buttons'>
+                                            <Link to={eachEvent}><Button basic color='green'>View</Button></Link>
+                                            <Link to=''><Button basic color='red'>Remove </Button></Link>
+                                        </div>
+                                    </Card.Content>
+                                </Card.Content>
+                            </Card>
+                        </Card.Group>
                     </ul>
-                    </div>
+                </div>
             )
         })
 
         return (
-<div>
-           
             <div>
-             <h4> {this.state.user.name}</h4>
-                <p> {this.state.user.email}</p> 
-               <p>{this.state.user.number}</p> 
-                <h1>Events You've Organized</h1>
-               {organizerEvents}
-               <h1>Events You've Attended</h1>
-               <Events>
-               {attendeeEvents}
-               </Events>
-            </div>
+
+                <div>
+                   
+                    <h4> {this.state.user.name}</h4>
+                    <p> {this.state.user.email}</p>
+                    <p>{this.state.user.number}</p>
+                    <h1>Events You've Organized</h1>
+                    {organizerEvents}<Button>Create A New Event</Button>
+                    <h1>Events You've Attended</h1>
+                    <Events>
+                        
+                        {attendeeEvents}
+                    </Events>
+                </div>
             </div>
         );
     }
