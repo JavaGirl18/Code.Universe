@@ -4,7 +4,9 @@ import axios from 'axios'
 class ShowUser extends Component {
 state={
     user: {},
-    events:[]
+    events:[],
+    organizerEvents:[],
+    attendeeEvents:[]
 }
 
 
@@ -27,7 +29,7 @@ getUser = (userId) => {
     axios.get(`/api/users/${userId}`)
         .then(res => {
             console.log("response from api", res.data)
-            this.setState({ user:res.data.user, events:res.data.events})
+            this.setState({ user:res.data.user, events:res.data.events, organizerEvents:res.data.organizer_events, attendeeEvents:res.data.attendee_events})
             console.log(this.state)
 
         })
