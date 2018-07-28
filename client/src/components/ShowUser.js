@@ -58,11 +58,46 @@ getUser = (userId) => {
             )
         })
 
+        // const eventId = this.props.match.eventId
+        const organizerEvents = this.state.organizerEvents.map((orgEvent, index) => {
+            // const eventId = event.id
+            // const eachEvent = `/events/${eventId}/organizers/${organizerId}`
+            return (
+                <div>
+
+                    <ul>
+                        {/* <Link to={eachOrganizer}> {organizer.name} </Link> */}
+                        {orgEvent.title}
+                    </ul>
+                    </div>
+            )
+        })
+
+        const attendeeEvents = this.state.attendeeEvents.map((attenEvent, index) => {
+            // const eventId = event.id
+            // const eachEvent = `/events/${eventId}/organizers/${organizerId}`
+            return (
+                <div>
+
+                    <ul>
+                        {/* <Link to={eachOrganizer}> {organizer.name} </Link> */}
+                        {attenEvent.title}
+                    </ul>
+                    </div>
+            )
+        })
+
         return (
 
 
             <div>
-               {eventlist}
+             <h4> {this.state.user.name}</h4>
+                <p> {this.state.user.email}</p> 
+               <p>{this.state.user.number}</p> 
+                <h1>Events you organized</h1>
+               {organizerEvents}
+               <h1>Events You've attended</h1>
+               {attendeeEvents}
             </div>
         );
     }
