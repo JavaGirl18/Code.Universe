@@ -26,8 +26,9 @@ class Api::EventsController < ApplicationController
         end
     
         def create
-            @event = Event.create!(event_params)
-            render json: @event
+            @user = User.find(params[:user_id])
+            @new_event = @user.events.create(event_params)
+            render json: @new_event
         end
     
         def update

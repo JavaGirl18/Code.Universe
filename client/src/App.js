@@ -35,8 +35,9 @@ componentDidMount() {
       return err.message
     }
   }
+
   addNewEventToEventsList = (newEvent, organizerId)=>{
-    axios.post(`/api/organizers/${organizerId}/events`, newEvent).then((res)=>{
+    axios.post(`/api/events`, newEvent).then((res)=>{
       this.getUsers()
     })
   }
@@ -67,7 +68,7 @@ componentDidMount() {
       <User {...props}/>
       )
     }
-    const NewEvent = (props) => {
+    const NewEvents = (props) => {
       return(
       <NewEvent addNewEventToEventsList={this.addNewEventToEventsList}{...props}/>
       )
@@ -81,10 +82,10 @@ componentDidMount() {
             <Route exact path='/' render={HomePage}/>
             <Route exact path ='/events' render={EventsPage}/> 
              <Route exact path ='/events/:eventId' render={ShowEvent}/>  
-                <Route exact path ='/events/new' render={NewEvent}/>
+             
             
             <Route exact path ='/users/:userId' render={ShowUser}/>
-    
+       <Route exact path ='/users/:userId/events' render={NewEvents}/>
         </Switch>
         </div>
       </Router>
