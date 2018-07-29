@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components'
-import { Form, Container } from 'semantic-ui-react'
+import { Form} from 'semantic-ui-react'
 
 const Back = styled.div`
 background-image: url("https://3c1703fe8d.site.internapcdn.net/newman/gfx/news/hires/aclusteranda.jpg");
@@ -37,7 +37,7 @@ class HomePage extends Component {
     render() {
         return (
 <Contain>
-            <Form>
+            <Form inverted>
                <Form.Field widths='equal'>
       <label fluid label="title">Event Title</label>
       <input type="text" name="title" placeholder='First Name' />
@@ -57,10 +57,12 @@ class HomePage extends Component {
     <input data-format="yyyy-MM-dd" type="text" name="title" control="select" /> 
        </Form.Field>
        <Form.TextArea label="Details" placeholder="Tell us more about the event...">
+       
    
    {/* <label fluid label="title">Details</label> */}
     {/* <input data-format="yyyy-MM-dd" type="text" name="title" control="select" />  */}
        </Form.TextArea>
+       <Form.Button>Submit</Form.Button>
                 </Form>
 </Contain>
 //             <div>
