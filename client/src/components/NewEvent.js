@@ -8,21 +8,23 @@ const Contain = styled.div`
 `
 class NewEvent extends Component {
     state = {
-        newEvent: {}
+        newEvent: {},
+        organizer:[],
+        redirect: false
     }
 
 
-    // handleNewEventChange = (event) => {
-    //     const attributeName = event.target.name
-    //     const attributeValue = event.target.value
+    handleNewEventChange = (event) => {
+        const attributeName = event.target.name
+        const attributeValue = event.target.value
 
-    //     const newUser = {
-    //         ...this.state.newEvent
-    //     }
-    //     newUser[attributeName] = attributeEvent
+        const newEvent = {
+            ...this.state.newEvent
+        }
+        newEvent[attributeName] = attributeValue
 
-    //     this.setState({ newEvent })
-    // };
+        this.setState({ newEvent })
+    };
 
     addNewEvent = (event) => {
         event.preventDefault()

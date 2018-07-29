@@ -38,56 +38,28 @@ padding:10px;
 class HomePage extends Component {
     render() {
         return (
-<Contain>
-            <Form inverted onSubmit={this.addNewEvent}>
-               <Form.Field widths='equal'>
-      <label fluid label="title">Event Title</label>
-      <input type="text" name="title" placeholder='First Name' />
-    </Form.Field>
-    <Form.Field widths='equal'>
-      <label fluid label="title">Location</label>
-      <input type="text" name="location" placeholder='Location' />
-    </Form.Field>
-    <Form.Field widths='equal'>
-   
-<label fluid label="title">Date</label>
- <input data-format="yyyy-MM-dd" type="text" name="title" control="select" /> 
-    </Form.Field>
-    <Form.Field widths='equal'>
-   
-   <label fluid label="title">Time</label>
-    <input data-format="yyyy-MM-dd" type="text" name="title" control="select" /> 
-       </Form.Field>
-       <Form.TextArea label="Details" placeholder="Tell us more about the event...">
-       
-   
-   {/* <label fluid label="title">Details</label> */}
-    {/* <input data-format="yyyy-MM-dd" type="text" name="title" control="select" />  */}
-       </Form.TextArea>
-       <Button type='submit' value="Create New User" inverted>Submit</Button>
-                </Form>
-</Contain>
-//             <div>
+
+            <div>
                    
-// <Img>
-//     <img src= 'https://pre00.deviantart.net/c5fc/th/pre/f/2014/053/e/2/free_space_galaxy_texture_by_lyshastra-d77gh54.jpg'/>
+<Img>
+    <img src= 'https://pre00.deviantart.net/c5fc/th/pre/f/2014/053/e/2/free_space_galaxy_texture_by_lyshastra-d77gh54.jpg'/>
  
-// </Img>
-// <Text>Home</Text>
+</Img>
+<Text>Home</Text>
 
 
-// <center><Sign>
-// <div class='ui padded segment'>
-//   <button class='ui fluid primary button' role='button'>
-//     Login
-//   </button>
-//   <div class='ui horizontal divider'>Or</div>
-//   <button class='ui fluid secondary button' role='button'>
-//     Sign Up Now
-//   </button>
-//   </div>
-//                 </Sign></center>
-//                 </div>
+<center><Sign>
+<div class='ui padded segment'>
+  <button class='ui fluid primary button' role='button'>
+    Login
+  </button>
+  <div class='ui horizontal divider'>Or</div>
+  <button class='ui fluid secondary button' role='button'>
+    Sign Up Now
+  </button>
+  </div>
+                </Sign></center>
+                </div>
          
         );
     }

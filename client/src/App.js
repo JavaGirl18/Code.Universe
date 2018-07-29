@@ -37,7 +37,7 @@ componentDidMount() {
   }
 
   addNewEventToEventsList = (newEvent, organizerId)=>{
-    axios.post(`/api/events`, newEvent).then((res)=>{
+    axios.post(`/api/events`, newEvent, organizerId).then((res)=>{
       this.getUsers()
     })
   }
@@ -85,7 +85,7 @@ componentDidMount() {
              
             
             <Route exact path ='/users/:userId' render={ShowUser}/>
-       <Route exact path ='/users/:userId/events' render={NewEvents}/>
+       <Route exact path ='/users/:userId/events/new' render={NewEvents}/>
         </Switch>
         </div>
       </Router>
