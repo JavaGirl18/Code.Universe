@@ -78,7 +78,7 @@ class ShowUser extends Component {
     submitUpdate = (event) => {
         event.preventDefault()
         const updatedUser = this.state.user
-        const userId = this.props.match.params.id
+        const userId = this.props.match.params.userId
         console.log(updatedUser)
         axios.put(`/api/users/${userId}`, updatedUser).then(() => {
             window.location.reload()
@@ -95,7 +95,7 @@ class ShowUser extends Component {
     render() {
 
 
- <Form onSubmit={this.submitUpdate}>
+ const updateForm=(<Form onSubmit={this.submitUpdate}>
                         <Form.Field widths='equal'>
                             <label fluid label="name">What's your First Name?</label>
                             <input type="text" name="name" placeholder='First Name' value={this.state.user.name} onChange={this.handleUpdate} />
@@ -109,8 +109,9 @@ class ShowUser extends Component {
                             <label fluid label="title">Number</label>
                             <input type="number" name="number" value={this.state.user.number} onChange={this.handleUpdate} />
                         </Form.Field>
-                        <Button type='submit' value="Update Profile" inverted>Submit</Button>
-                    </Form>
+                        <Form.Field>
+                        <button type='submit' value="Update Profile" inverted>Submit</button></Form.Field>
+                    </Form>)
 
 
         const eventId = this.props.match.eventId
@@ -201,7 +202,7 @@ class ShowUser extends Component {
                     <h4> {this.state.user.name}</h4>
                     <p> {this.state.user.email}</p>
                     <p>{this.state.user.number}</p>
-                    <button onClick={this.toggleButton}>Update Profile</button>
+                    <button onClick={this.toggleButton}>Update Profile</button>{this.state.editUser ? updateForm : null}
                     <h1>Events You've Organized</h1>
                     {organizerEvents}<Button>Create A New Event</Button>
                     <h1>Events You've Attended</h1>
@@ -209,6 +210,7 @@ class ShowUser extends Component {
                         
                         {attendeeEvents}
                     </Events>
+                    
                 </div>
             </div>
         );
