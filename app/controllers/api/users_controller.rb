@@ -26,14 +26,12 @@ class Api::UsersController < ApplicationController
                 time:event.time,
                 details: event.details
             }
-            # every_event[:attendee] = event.organizer.user if event.attendee_id
-            # every_event[:organizer] = event.organizer.user  if event.organizer_id
             every_event
         end
         render json:{user: @user, events: @userEvents, organizer_events:@organizer_events, attendee_events: @attendee_events}
     end
 
-    def create
+    def new
         @user = User.create!(user_params)
         render json: @user
     end

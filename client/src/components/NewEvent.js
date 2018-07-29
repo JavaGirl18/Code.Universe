@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import styled from 'styled-components'
 import { Form, Button } from 'semantic-ui-react'
+import {Redirect} from 'react-router-dom'
 
 
 const Contain = styled.div`
+width: 30%;
+background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbB1cRdsN48EwGJmgcpxPHPOUu3jhtFCF938QAUGh__MWv7968");
+border:solid;
+padding:10px;
 
 `
 class NewEvent extends Component {
@@ -39,7 +44,7 @@ class NewEvent extends Component {
         console.log("new events")
         if (this.state.redirect) {
             console.log('redirecting')
-            // return <Redirect push to={'/'} />
+            return <Redirect push to={'/events'} />
         }
 
         return (
@@ -51,18 +56,18 @@ class NewEvent extends Component {
                     </Form.Field>
                     <Form.Field widths='equal'>
                         <label fluid label="title">Location</label>
-                        <input type="text" name="location" placeholder='Location' />
+                        <input type="text" name="location" placeholder='Location' onChange={this.handleNewProjectChange} />
                     </Form.Field>
                     <Form.Field widths='equal'>
 
                         <label fluid label="title">Date</label>
-                        <input data-format="yyyy-MM-dd" type="text" name="title" control="select" />
+                        <input data-format="yyyy-MM-dd" type="date" name="title" control="select" onChange={this.handleNewProjectChange}/>
                     </Form.Field>
                     <Form.Field widths='equal'>
                         <label fluid label="title">Time</label>
-                        <input data-format="yyyy-MM-dd" type="date" name="title" control="select" />
+                        <input data-format="yyyy-MM" type="time" name="title" control="select" onChange={this.handleNewProjectChange} />
                     </Form.Field>
-                    <Form.TextArea label="Details" placeholder="Tell us more about the event...">
+                    <Form.TextArea label="Details" placeholder="Tell us more about the event..." onChange={this.handleNewProjectChange}>
                     </Form.TextArea>
                     <Button type='submit' value="Create New User" inverted>Submit</Button>
                 </Form>

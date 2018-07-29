@@ -37,7 +37,8 @@ class Events extends Component {
                         <Link to={eachEvent}> {event.title} </Link> 
                         
                        Date: {event.date} Time: {event.time}
-                    </li>
+                    </li>  
+               
                 </div>
             )
         })
@@ -45,6 +46,7 @@ class Events extends Component {
         return (
             <div>
                 {eventslist}
+              
                 
             </div>
         );

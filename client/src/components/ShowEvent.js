@@ -5,7 +5,6 @@ import styled from 'styled-components'
 
 const FlexBox = styled.div`
 display: flex;
-j
 
 `
 class ShowEvent extends Component {
@@ -81,19 +80,7 @@ class ShowEvent extends Component {
             )
         })
 
-        // const attendeelist = this.state.attendees.map((attendee, index) => {
-        //     // const postId = post.id
-        //     // const eachPost = `/events/${eventId}/organizers/${organizerId}`
-        //     return (
-        //         <div>
-        //             <ul>
-        //                     {post.title}
-        //                     {post.comment}
-        //             </ul>
-
-        //         </div>
-        //     )
-        // })
+      
  console.log(this.state.posts.organizer)
         return (
            
@@ -107,6 +94,7 @@ class ShowEvent extends Component {
                 <p>Date: {this.state.event.date} Time: </p>
 
               <p> {this.state.event.time }</p>
+              <button>RSVP to this event</button>
               </FlexBox>
               <p> Details: {this.state.event.details}</p>
  {postlist}
