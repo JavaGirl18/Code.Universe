@@ -39,6 +39,8 @@ class Events extends Component {
                        Date: {event.date} Time: {event.time}
                     </li>  
                
+
+    
                 </div>
             )
         })

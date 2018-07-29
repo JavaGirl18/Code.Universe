@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios'
-import { Button, Card, Image } from 'semantic-ui-react'
+import { Button, Card, Form } from 'semantic-ui-react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
@@ -15,7 +15,8 @@ class ShowUser extends Component {
         user: {},
         events: [],
         organizerEvents: [],
-        attendeeEvents: []
+        attendeeEvents: [],
+        editUser: false
     }
 
 
@@ -64,7 +65,53 @@ class ShowUser extends Component {
         })
     }
 
+    handleUpdate = (event) => {
+        const copyOfState = { ...this.state.user }
+        const attributeName = event.target.name
+        const attributeValue = event.target.value
+        copyOfState[attributeName] = attributeValue
+
+        this.setState({ user: copyOfState })
+    }
+
+
+    submitUpdate = (event) => {
+        event.preventDefault()
+        const updatedUser = this.state.user
+        const userId = this.props.match.params.id
+        console.log(updatedUser)
+        axios.put(`/api/users/${userId}`, updatedUser).then(() => {
+            window.location.reload()
+
+        })
+
+    }
+
+    toggleButton = () => {
+        const canEdit = !this.state.editUser
+        this.setState({ editUser: canEdit })
+    }
+
     render() {
+
+
+ <Form onSubmit={this.submitUpdate}>
+                        <Form.Field widths='equal'>
+                            <label fluid label="name">What's your First Name?</label>
+                            <input type="text" name="name" placeholder='First Name' value={this.state.user.name} onChange={this.handleUpdate} />
+                        </Form.Field>
+                        <Form.Field widths='equal'>
+                            <label fluid label="email">What's your Email?</label>
+                            <input type="text" name="email" placeholder='Location' value={this.state.user.email} onChange={this.handleUpdate} />
+                        </Form.Field>
+                        <Form.Field widths='equal'>
+
+                            <label fluid label="title">Number</label>
+                            <input type="number" name="number" value={this.state.user.number} onChange={this.handleUpdate} />
+                        </Form.Field>
+                        <Button type='submit' value="Update Profile" inverted>Submit</Button>
+                    </Form>
+
 
         const eventId = this.props.match.eventId
         const eventlist = this.state.events.map((event, index) => {
@@ -80,6 +127,8 @@ class ShowUser extends Component {
                 </div>
             )
         })
+
+        
 
         // const eventId = this.props.match.eventId
         const organizerEvents = this.state.organizerEvents.map((orgEvent, index) => {
@@ -152,6 +201,7 @@ class ShowUser extends Component {
                     <h4> {this.state.user.name}</h4>
                     <p> {this.state.user.email}</p>
                     <p>{this.state.user.number}</p>
+                    <button onClick={this.toggleButton}>Update Profile</button>
                     <h1>Events You've Organized</h1>
                     {organizerEvents}<Button>Create A New Event</Button>
                     <h1>Events You've Attended</h1>

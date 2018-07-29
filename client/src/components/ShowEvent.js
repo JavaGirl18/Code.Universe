@@ -2,10 +2,14 @@ import React, { Component } from 'react';
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import { Button, Card, Image } from 'semantic-ui-react'
 
 const FlexBox = styled.div`
 display: flex;
 
+`
+const Post = styled(Card.Description)`
+//    text-wrap: normal; 
 `
 class ShowEvent extends Component {
     state = {
@@ -63,43 +67,69 @@ class ShowEvent extends Component {
                 </div>
             )
         })
-        
+
         const postlist = this.state.posts.map((post, index) => {
-            // const postId = post.id
-            // const eachPost = `/events/${eventId}/organizers/${organizerId}`
+         
             return (
-                <div>
-                    {/* <ul> */}
-                           <p> {post.organizer  &&  post.organizer.name} </p> 
-                           <p> {post.attendee && post.attendee.name}</p>
-                           <p> {post.title}</p>
-                           <p> {post.comment} </p>
-                    {/* </ul> */}
 
-                </div>
+                <Post key ={index}>
+                <ul>
+                
+                        <Card>
+                            <Card.Content>
+                                
+                                <Image floated='left' size='mini' src={post.organizer && post.organizer.photo}/> 
+                                <Image floated='left' size='mini' src={post.attendee && post.attendee.photo}/>
+                                <Card.Header>{post.attendee && post.attendee.name}</Card.Header>
+                                <Card.Meta>{post.title}</Card.Meta>
+                                <Card.Description>
+                                    {post.comment}
+                                </Card.Description>
+                            </Card.Content>
+                        </Card>
+                      
+                        </ul>
+                        {/* <ul>
+                     
+                        <Card>
+                            <Card.Content>
+                            <Image floated='left' size='mini' src={post.organizer && post.organizer.photo}/>
+                            <Card.Header>{post.organizer && post.organizer.name}</Card.Header>
+                            <Card.Meta>{post.title}</Card.Meta>
+                            <Card.Description>
+                                    {post.comment}
+                                </Card.Description>
+                            </Card.Content>
+
+                        </Card>
+                 
+                    </ul> */}
+</Post>
+           
             )
-        })
+    })
 
-      
- console.log(this.state.posts.organizer)
-        return (
+
+
+    return(
            
             <div>
-    {this.state.event.title}
-               <hr></hr>
-              <h4> Organizers: </h4>{organizerlist}
-            
-               <p>Location: {this.state.event.location}</p>
-                <FlexBox>
-                <p>Date: {this.state.event.date} Time: </p>
+    { this.state.event.title }
+    < hr ></hr >
+        <h4> Organizers: </h4>{ organizerlist }
 
-              <p> {this.state.event.time }</p>
-              <button>RSVP to this event</button>
-              </FlexBox>
-              <p> Details: {this.state.event.details}</p>
- {postlist}
+<p>Location: {this.state.event.location}</p>
+    <FlexBox>
+        <p>Date: {this.state.event.date} Time: </p>
 
-            </div>
+        <p> {this.state.event.time}</p>
+        <button>RSVP to this event</button>
+    </FlexBox>
+    <p> Details: {this.state.event.details}</p>
+    
+ { postlist }
+
+            </div >
         );
     }
 }

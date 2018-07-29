@@ -31,7 +31,7 @@ class Api::UsersController < ApplicationController
         render json:{user: @user, events: @userEvents, organizer_events:@organizer_events, attendee_events: @attendee_events}
     end
 
-    def new
+    def create
         @user = User.create!(user_params)
         render json: @user
     end

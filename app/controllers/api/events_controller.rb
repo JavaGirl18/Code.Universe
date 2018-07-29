@@ -8,6 +8,7 @@ class Api::EventsController < ApplicationController
         def show
             @event = Event.find(params[:id])
             @organizers = @event.users
+            @attendee = @event.attendees
             @posts = @event.posts.map do |post|
                 custom_post = {
                     id: post.id,
@@ -25,7 +26,7 @@ class Api::EventsController < ApplicationController
           
         end
     
-        def new
+        def create
             @user = User.find(params[:user_id])
             @new_event = @user.events.create(event_params)
             render json: {event: @new_event, organizer: @user}
