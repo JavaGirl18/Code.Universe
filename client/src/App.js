@@ -7,6 +7,7 @@ import axios from 'axios'
 import Events from './components/Events'
 import Event from './components/ShowEvent'
 import User from './components/ShowUser'
+import NewEvent from './components/NewEvent'
 
 import './App.css';
 
@@ -34,7 +35,11 @@ componentDidMount() {
       return err.message
     }
   }
-
+  addNewEventToEventsList = (newEvent, organizerId)=>{
+    axios.post(`/api/organizers/${organizerId}/events`, newEvent).then((res)=>{
+      this.getUsers()
+    })
+  }
 
   render() {
     const HomePage = (props) => {
@@ -62,6 +67,11 @@ componentDidMount() {
       <User {...props}/>
       )
     }
+    const NewEvent = (props) => {
+      return(
+      <NewEvent addNewEventToEventsList={this.addNewEventToEventsList}{...props}/>
+      )
+    }
 
     return (
       <Router>
@@ -69,9 +79,12 @@ componentDidMount() {
           <NavBar/>
         <Switch>
             <Route exact path='/' render={HomePage}/>
-            <Route exact path ='/events' render={EventsPage}/>
-            <Route exact path ='/events/:eventId' render={ShowEvent}/>
+            <Route exact path ='/events' render={EventsPage}/> 
+             <Route exact path ='/events/:eventId' render={ShowEvent}/>  
+                <Route exact path ='/events/new' render={NewEvent}/>
+            
             <Route exact path ='/users/:userId' render={ShowUser}/>
+    
         </Switch>
         </div>
       </Router>

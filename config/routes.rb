@@ -17,5 +17,8 @@ Rails.application.routes.draw do
     resources :events do
       resources :posts
     end
+    # resources :organizers do
+    #   resources :events
+    # end
   end
 end  
