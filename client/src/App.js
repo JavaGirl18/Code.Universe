@@ -116,7 +116,7 @@ class App extends Component {
     }
     const ShowEvent = (props) => {
       return (
-        <Event loggedUser={this.state.loggedUser}{...props} />
+        <Event userId = {this.state.userId}loggedUser={this.state.loggedUser}{...props} />
       )
     }
     const ShowUser = (props) => {
@@ -141,7 +141,7 @@ class App extends Component {
         <div>
 
           {this.state.loggedInstate ?
-            <Redirect to={`/users/${this.state.userId}`} /> :
+            <Redirect to={`/events`} /> :
             null}
 
           <NavBar />

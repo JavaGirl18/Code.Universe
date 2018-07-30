@@ -24,7 +24,8 @@ class ShowEvent extends Component {
         event: {},
         organizers: [],
         posts: [],
-        attendees: []
+        attendees: [],
+      
     }
 
     componentDidMount() {
@@ -32,9 +33,9 @@ class ShowEvent extends Component {
         // this.props.getProject(projectId)
 
         if (this.props.match.params) {
-            // console.log("PROPS", this.props)
+         const loggedUser = this.props.loggedUser
             const eventId = this.props.match.params.eventId
-            this.getEvent(eventId)
+            this.getEvent(eventId, loggedUser)
 
         }
     }
@@ -58,9 +59,9 @@ class ShowEvent extends Component {
     addNewAttendeeToAttendeesList = (newAttendee) => {
         // const attendeesList = [...this.state.attendees]
         // attendeesList.push(newAttendee)
-const eventId = this.state.event.id
+const eventId = this.props.match.params.eventId
         axios.post(`/api/events/${eventId}/attendees`, newAttendee).then(res => {
-            this.getEvent()
+            this.getEvent(eventId)
         })
 
     }
@@ -69,6 +70,7 @@ const eventId = this.state.event.id
 
 
     render() {
+        // console.log(this.state.loggedUser)
         console.log(this.state.attendees.length)
         const eventId = this.props.match.eventId
         const organizerlist = this.state.organizers.map((organizer, index) => {
@@ -87,23 +89,23 @@ const eventId = this.state.event.id
         })
 
 
-        const updateForm = (<Form onSubmit={this.submitUpdate}>
-            <Form.Field widths='equal'>
-                <label fluid label="title">Event Title</label>
-                <input type="text" name="title" placeholder='Event Title' value={this.state.event.name} onChange={this.handleUpdate} />
-            </Form.Field>
-            <Form.Field widths='equal'>
-                <label fluid label="email">Event Location</label>
-                <input type="text" name="email" placeholder='Location' value={this.state.event.location} onChange={this.handleUpdate} />
-            </Form.Field>
-            <Form.Field widths='equal'>
+        // const updateForm = (<Form onSubmit={this.submitUpdate}>
+        //     <Form.Field widths='equal'>
+        //         <label fluid label="title">Event Title</label>
+        //         <input type="text" name="title" placeholder='Event Title' value={this.state.event.name} onChange={this.handleUpdate} />
+        //     </Form.Field>
+        //     <Form.Field widths='equal'>
+        //         <label fluid label="email">Event Location</label>
+        //         <input type="text" name="email" placeholder='Location' value={this.state.event.location} onChange={this.handleUpdate} />
+        //     </Form.Field>
+        //     <Form.Field widths='equal'>
 
-                <label fluid label="title">Number</label>
-                <input type="number" name="number" value={this.state.user.number} onChange={this.handleUpdate} />
-            </Form.Field>
-            <Form.Field>
-                <button type='submit' value="Update Profile" inverted>Submit</button></Form.Field>
-        </Form>)
+        //         <label fluid label="title">Number</label>
+        //         <input type="number" name="number" value={this.state.user.number} onChange={this.handleUpdate} />
+        //     </Form.Field>
+        //     <Form.Field>
+        //         <button type='submit' value="Update Profile" inverted>Submit</button></Form.Field>
+        // </Form>)
 
 
         const postlist = this.state.posts.map((post, index) => {
