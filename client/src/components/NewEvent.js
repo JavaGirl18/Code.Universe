@@ -9,7 +9,11 @@ width: 30%;
 background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbB1cRdsN48EwGJmgcpxPHPOUu3jhtFCF938QAUGh__MWv7968");
 border:solid;
 padding:10px;
+margin-top:50px;
+`
 
+const Body = styled.div`
+background-color: black;
 `
 class NewEvent extends Component {
     state = {
@@ -36,7 +40,7 @@ class NewEvent extends Component {
 
         this
             .props
-            .addNewEventToEventsList(this.state.newEvent)
+            .addNewEventToEventsList(this.state.newEvent, this.props.match.params.userId)
 
         this.setState({ redirect: true })
     }
@@ -46,33 +50,34 @@ class NewEvent extends Component {
             console.log('redirecting')
             return <Redirect push to={'/events'} />
         }
-
+console.log(this.state.newEvent)
         return (
-            <Contain>
+            <Body>
+           <center> <Contain>
                 <Form inverted onSubmit={this.addNewEvent}>
                     <Form.Field widths='equal'>
                         <label fluid label="title">Event Title</label>
-                        <input type="text" name="title" placeholder='First Name' onChange={this.handleNewEventChange} />
+                        <input type="text" name="title" placeholder='Title of Event' onChange={this.handleNewEventChange} />
                     </Form.Field>
                     <Form.Field widths='equal'>
                         <label fluid label="title">Location</label>
-                        <input type="text" name="location" placeholder='Location' onChange={this.handleNewProjectChange} />
+                        <input type="text" name="location" placeholder='Location' onChange={this.handleNewEventChange} />
                     </Form.Field>
                     <Form.Field widths='equal'>
 
                         <label fluid label="title">Date</label>
-                        <input data-format="yyyy-MM-dd" type="date" name="title" control="select" onChange={this.handleNewProjectChange}/>
+                        <input data-format="yyyy-MM-dd" type="date" name="date" control="select" onChange={this.handleNewEventChange}/>
                     </Form.Field>
                     <Form.Field widths='equal'>
                         <label fluid label="title">Time</label>
-                        <input time-format type="time" name="title" control="select" onChange={this.handleNewProjectChange} />
+                        <input time-format type="time" name="time" control="select" onChange={this.handleNewEventChange} />
                     </Form.Field>
-                    <Form.TextArea label="Details" placeholder="Tell us more about the event..." onChange={this.handleNewProjectChange}>
+                    <Form.TextArea label="Details" name="details" placeholder="Tell us more about the event..." onChange={this.handleNewEventChange}>
                     </Form.TextArea>
                     <Button type='submit' value="Create New User" inverted>Submit</Button>
                 </Form>
-            </Contain>
-
+            </Contain></center>
+</Body>
         );
     }
 }

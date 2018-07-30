@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 import { Link } from 'react-router-dom'
-import ShowEvent from './ShowEvent'
+import { List } from 'semantic-ui-react'
 
 class Events extends Component {
 
@@ -26,30 +26,35 @@ class Events extends Component {
     }
 
     render() {
-        
+
         const eventslist = this.state.events.map((event, index) => {
             const eventId = event.id
             const eachEvent = `/events/${eventId}`
             return (
                 <div>
-                    <li>
 
-                        <Link to={eachEvent}> {event.title} </Link> 
-                        
-                       Date: {event.date} Time: {event.time}
-                    </li>  
-               
-
-    
+                    <List animated verticalAlign='middle'>
+                        <List.Item>
+                            <List.Icon name='marker' />
+                            <List.Content>
+                                <Link to={eachEvent}><List.Header as='a'>{event.title}</List.Header></Link>
+                                <List.Description> Date:
+                                     {event.date} Time: {event.time}
+                                </List.Description>
+                            </List.Content>
+                        </List.Item>
+                    </List>
                 </div>
             )
         })
 
         return (
             <div>
+                <h1>Upcoming Events</h1>
+                <hr></hr>
                 {eventslist}
-              
-                
+
+
             </div>
         );
     }

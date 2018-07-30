@@ -48,7 +48,8 @@ class App extends Component {
 
 
   addNewEventToEventsList = (newEvent, userId) => {
-    axios.post(`/api/users/${userId}/events`, newEvent, userId).then((res) => {
+    console.log(userId)
+    axios.post(`/api/users/${userId}/events`, newEvent).then((res) => {
       this.getUsers()
     })
   }

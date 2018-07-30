@@ -12,6 +12,14 @@ const Number = styled.div`
 display:flex;
 margin-top: 5px;
 `
+const EventsList = styled.div`
+display: inline flex;
+padding:10px;
+`
+const EventList = styled.div`
+display: inline flex;
+padding:10px;
+`
 class ShowUser extends Component {
     state = {
         user: {},
@@ -123,7 +131,7 @@ class ShowUser extends Component {
         const eventId = this.props.match.eventId
         const eventlist = this.state.events.map((event, index) => {
             const eventId = event.id
-            // const eachEvent = `/events/${eventId}/organizers/${organizerId}`
+            
             return (
                 <div key={index}>
 
@@ -137,24 +145,24 @@ class ShowUser extends Component {
 
 
 
-        // const eventId = this.props.match.eventId
-        const organizerEvents = this.state.organizerEvents.map((orgEvent, index) => {
+       const listOfOrganizerEvents = this.state.organizerEvents || []
+       console.log(listOfOrganizerEvents)
+        const organizerEvents = listOfOrganizerEvents.map((orgEvent, index) => {
             const eventId = orgEvent.id
             const eachEvent = `/events/${eventId}`
+            console.log(orgEvent)
             return (
-                <div key={index}>
+              
+                <EventList key={index}>
 
-                    <ul>
-
+    
                         <Card.Group>
                             <Card>
                                 <Card.Content>
                                     <i class='thumbtack icon' />
                                     <Link to=''> <Card.Header>{orgEvent.title}</Card.Header></Link>
                                     <Card.Meta>{orgEvent.date}</Card.Meta>
-                                    {/* <Card.Description>
-                  Steve wants to add you to the group <strong>best friends</strong>
-                </Card.Description> */}
+                                
                                     <Card.Content extra>
                                         <div className='ui two buttons'>
                                             <Link to={eachEvent}><Button basic color='green'>View</Button></Link>
@@ -164,8 +172,8 @@ class ShowUser extends Component {
                                 </Card.Content>
                             </Card>
                         </Card.Group>
-                    </ul>
-                </div>
+                
+                </EventList>
             )
         })
 
@@ -173,7 +181,7 @@ class ShowUser extends Component {
             const eventId = attenEvent.id
             const eachEvent = `/events/${eventId}`
             return (
-                <div key={index}>
+                <EventsList key={index}>
 
 
                     {/* <Link to={eachOrganizer}> {organizer.name} </Link> */}
@@ -196,7 +204,7 @@ class ShowUser extends Component {
                         </Card>
                     </Card.Group>
 
-                </div>
+                </EventsList>
             )
         })
 

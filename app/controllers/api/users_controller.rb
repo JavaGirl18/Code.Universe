@@ -13,7 +13,9 @@ class Api::UsersController < ApplicationController
         @organizer_events = @organizers.map do |organizer|
             event = organizer.event
             event
-        end
+          
+        end 
+         puts @organizer_events.inspect
         @attendee_events = @attendees.map do |attendee|
             event = attendee.event
             event

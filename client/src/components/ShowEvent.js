@@ -11,6 +11,15 @@ display: flex;
 const Post = styled(Card.Description)`
 //    text-wrap: normal; 
 `
+const Title = styled.div`
+max-width: 300px;
+height:50px;
+border:solid;
+display:flex;
+
+font-size: 10px;
+
+`
 class ShowEvent extends Component {
     state = {
         event: {},
@@ -78,12 +87,12 @@ class ShowEvent extends Component {
                         <Card>
                             <Card.Content>
                                 
-                                <Image floated='left' size='mini' src={post.organizer && post.organizer.photo}/> 
+                                <Image floated='right' size='mini' src={post.organizer && post.organizer.photo}/> 
                                 <Image floated='left' size='mini' src={post.attendee && post.attendee.photo}/>
                                 <Card.Header>{post.attendee && post.attendee.name}</Card.Header>
-                                <Card.Meta>{post.title}</Card.Meta>
-                                <Card.Description>
-                                    {post.comment}
+                              <Card.Meta>{post.title}</Card.Meta>
+                               <Card.Description>
+                                  <Title>    {post.comment}</Title> 
                                 </Card.Description>
                             </Card.Content>
                         </Card>
