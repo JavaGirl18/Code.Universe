@@ -13,8 +13,9 @@ def show
 end
 
 def create
+  puts params
   @event = Event.find(params[:event_id])
-  @user = User.find(params[:user_id])
+  @user = User.find_by_email(params[:email])
   @attendee = Attendee.create(user:@user, event: @event)
 end
 end

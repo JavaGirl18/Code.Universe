@@ -128,7 +128,7 @@ class ShowUser extends Component {
         </Form>)
 
 
-        const eventId = this.props.match.eventId
+        // const eventId = this.props.match.eventId
         const eventlist = this.state.events.map((event, index) => {
             const eventId = event.id
 

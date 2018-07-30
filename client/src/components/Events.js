@@ -31,7 +31,7 @@ class Events extends Component {
             const eventId = event.id
             const eachEvent = `/events/${eventId}`
             return (
-                <div>
+                <div key={index}>
 
                     <List animated verticalAlign='middle'>
                         <List.Item>

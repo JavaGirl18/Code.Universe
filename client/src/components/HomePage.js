@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components'
-import { Form, Button} from 'semantic-ui-react'
+import { Form, Button, Checkbox } from 'semantic-ui-react'
+import { Redirect } from 'react-router-dom'
 
 const Back = styled.div`
 background-image: url("https://3c1703fe8d.site.internapcdn.net/newman/gfx/news/hires/aclusteranda.jpg");
@@ -36,31 +37,46 @@ padding:10px;
 
 
 class HomePage extends Component {
+
+    handleSubmit = (event) => {
+        event.preventDefault()
+        this.props.findUserByEmail()
+    }
+
     render() {
+        if (this.props.loggedInstate) {
+            // return <Redirect to={`/users/${this.props.userId}`} />
+        }
+
         return (
 
             <div>
-                   
-<Img>
-    <img src= 'https://pre00.deviantart.net/c5fc/th/pre/f/2014/053/e/2/free_space_galaxy_texture_by_lyshastra-d77gh54.jpg'/>
- 
-</Img>
-<Text>Home</Text>
+
+                <Img>
+                    <img src='https://pre00.deviantart.net/c5fc/th/pre/f/2014/053/e/2/free_space_galaxy_texture_by_lyshastra-d77gh54.jpg' />
+
+                </Img>
+                <Text>Home</Text>
 
 
-<center><Sign>
-<div class='ui padded segment'>
-  <button class='ui fluid primary button' role='button'>
-    Login
-  </button>
-  <div class='ui horizontal divider'>Or</div>
-  <button class='ui fluid secondary button' role='button'>
-    Sign Up Now
-  </button>
-  </div>
+                <center><Sign>
+                    <Form onSubmit={this.handleSubmit}>
+                        <Form.Field>
+                            <label>Email</label>
+                            <input type="text" name="email" onChange={this.props.handleFindUser} />
+                        </Form.Field>
+                        <Form.Field>
+                            <label>Password</label>
+                            <input type="password" name="password" onChange={this.props.handleFindUser} />
+                        </Form.Field>
+                        <Form.Field>
+                            <Checkbox label='I agree to the Terms and Conditions' />
+                        </Form.Field>
+                        <Button type='submit'>Submit</Button>
+                    </Form>
                 </Sign></center>
-                </div>
-         
+            </div>
+
         );
     }
 }
