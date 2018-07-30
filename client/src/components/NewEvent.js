@@ -65,7 +65,7 @@ class NewEvent extends Component {
                     </Form.Field>
                     <Form.Field widths='equal'>
                         <label fluid label="title">Time</label>
-                        <input data-format="yyyy-MM" type="time" name="title" control="select" onChange={this.handleNewProjectChange} />
+                        <input time-format type="time" name="title" control="select" onChange={this.handleNewProjectChange} />
                     </Form.Field>
                     <Form.TextArea label="Details" placeholder="Tell us more about the event..." onChange={this.handleNewProjectChange}>
                     </Form.TextArea>

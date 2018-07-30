@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   namespace :api do
-    resources :users 
+    resources :users do
+     resources :events
+    end
 
     resources :events do
       resources :organizers do

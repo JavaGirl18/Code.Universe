@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import axios from 'axios'
-import { Button, Card, Form } from 'semantic-ui-react'
+import { Button, Card, Form, List } from 'semantic-ui-react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
 const Events = styled.div`
 display: flex;
 flex-wrap:wrap;
-
-
+`
+const Number = styled.div`
+display:flex;
+margin-top: 5px;
 `
 class ShowUser extends Component {
     state = {
@@ -28,7 +30,7 @@ class ShowUser extends Component {
         if (this.props.match.params) {
             // console.log("PROPS", this.props)
             const userId = this.props.match.params.userId
-         
+
             this.getUser(userId)
             console.log(userId)
 
@@ -51,15 +53,15 @@ class ShowUser extends Component {
     }
 
     deleteEvent = () => {
-   const orgEventId =this.state.organizerEvents.id
-   console.log(this.state.organizerEvents._id)
+        const orgEventId = this.state.organizerEvents.id
+        console.log(this.state.organizerEvents._id)
         //make a delete request to our copy of the api using the params to identify specific idea
-        axios.delete(`/api/events/${orgEventId}`).then((res) => {   
+        axios.delete(`/api/events/${orgEventId}`).then((res) => {
             //setstate
             this.setState({
                 //data matching user will be removed from the state.user
                 organizerEvents: res.data
-              
+
             })
             // this.getUsers()
         })
@@ -91,27 +93,31 @@ class ShowUser extends Component {
         const canEdit = !this.state.editUser
         this.setState({ editUser: canEdit })
     }
+    deleteUser = (userId) => {
+        this.props.deleteUser(userId)
+        this.setState({ redirect: true })
+    }
 
     render() {
+        const userId = this.props.match.params.userId
 
+        const updateForm = (<Form onSubmit={this.submitUpdate}>
+            <Form.Field widths='equal'>
+                <label fluid label="name">What's your First Name?</label>
+                <input type="text" name="name" placeholder='First Name' value={this.state.user.name} onChange={this.handleUpdate} />
+            </Form.Field>
+            <Form.Field widths='equal'>
+                <label fluid label="email">What's your Email?</label>
+                <input type="text" name="email" placeholder='Location' value={this.state.user.email} onChange={this.handleUpdate} />
+            </Form.Field>
+            <Form.Field widths='equal'>
 
- const updateForm=(<Form onSubmit={this.submitUpdate}>
-                        <Form.Field widths='equal'>
-                            <label fluid label="name">What's your First Name?</label>
-                            <input type="text" name="name" placeholder='First Name' value={this.state.user.name} onChange={this.handleUpdate} />
-                        </Form.Field>
-                        <Form.Field widths='equal'>
-                            <label fluid label="email">What's your Email?</label>
-                            <input type="text" name="email" placeholder='Location' value={this.state.user.email} onChange={this.handleUpdate} />
-                        </Form.Field>
-                        <Form.Field widths='equal'>
-
-                            <label fluid label="title">Number</label>
-                            <input type="number" name="number" value={this.state.user.number} onChange={this.handleUpdate} />
-                        </Form.Field>
-                        <Form.Field>
-                        <button type='submit' value="Update Profile" inverted>Submit</button></Form.Field>
-                    </Form>)
+                <label fluid label="title">Number</label>
+                <input type="number" name="number" value={this.state.user.number} onChange={this.handleUpdate} />
+            </Form.Field>
+            <Form.Field>
+                <button type='submit' value="Update Profile" inverted>Submit</button></Form.Field>
+        </Form>)
 
 
         const eventId = this.props.match.eventId
@@ -129,7 +135,7 @@ class ShowUser extends Component {
             )
         })
 
-        
+
 
         // const eventId = this.props.match.eventId
         const organizerEvents = this.state.organizerEvents.map((orgEvent, index) => {
@@ -143,7 +149,7 @@ class ShowUser extends Component {
                         <Card.Group>
                             <Card>
                                 <Card.Content>
-                                <i class='thumbtack icon'/>
+                                    <i class='thumbtack icon' />
                                     <Link to=''> <Card.Header>{orgEvent.title}</Card.Header></Link>
                                     <Card.Meta>{orgEvent.date}</Card.Meta>
                                     {/* <Card.Description>
@@ -169,48 +175,69 @@ class ShowUser extends Component {
             return (
                 <div key={index}>
 
-                    <ul>
-                        {/* <Link to={eachOrganizer}> {organizer.name} </Link> */}
-                        <Card.Group>
-                            <Card>
-                                <Card.Content>
-                                <i class='thumbtack icon'/>
-                                    <Link to=''> <Card.Header>{attenEvent.title}</Card.Header></Link>
-                                    <Card.Meta>{attenEvent.date}</Card.Meta>
-                                    {/* <Card.Description>
+
+                    {/* <Link to={eachOrganizer}> {organizer.name} </Link> */}
+                    <Card.Group>
+                        <Card>
+                            <Card.Content>
+                                <i class='thumbtack icon' />
+                                <Link to=''> <Card.Header>{attenEvent.title}</Card.Header></Link>
+                                <Card.Meta>{attenEvent.date}</Card.Meta>
+                                {/* <Card.Description>
                   Steve wants to add you to the group <strong>best friends</strong>
                 </Card.Description> */}
-                                    <Card.Content extra>
-                                        <div className='ui two buttons'>
-                                            <Link to={eachEvent}><Button basic color='green'>View</Button></Link>
-                                            <Link to=''><Button basic color='red'>Remove </Button></Link>
-                                        </div>
-                                    </Card.Content>
+                                <Card.Content extra>
+                                    <div className='ui two buttons'>
+                                        <Link to={eachEvent}><Button basic color='green'>View</Button></Link>
+                                        <Link to=''><Button basic color='red'>Remove </Button></Link>
+                                    </div>
                                 </Card.Content>
-                            </Card>
-                        </Card.Group>
-                    </ul>
+                            </Card.Content>
+                        </Card>
+                    </Card.Group>
+
                 </div>
             )
         })
 
         return (
+
             <div>
 
                 <div>
-                   
-                    <h4> {this.state.user.name}</h4>
-                    <p> {this.state.user.email}</p>
-                    <p>{this.state.user.number}</p>
+
+                    <List>
+                        <List.Item>
+                            <List.Icon name='users' />
+                            <List.Content>{this.state.user.name}</List.Content>
+                        </List.Item>
+                        <List.Item>
+                            <List.Icon name='mail' />
+                            <List.Content>
+                                {this.state.user.email}
+                            </List.Content>
+                            <List.Item>
+                                <Number>
+                                <List.Icon name='phone' />
+                                <List.Content>{this.state.user.number}
+                                </List.Content></Number>
+                            </List.Item>
+
+                        </List.Item>
+                    </List>
+
+
                     <button onClick={this.toggleButton}>Update Profile</button>{this.state.editUser ? updateForm : null}
+                    <button onClick={() => this.deleteUser(this.props.match.params.userId)}>Delete Profile</button>
                     <h1>Events You've Organized</h1>
-                    {organizerEvents}<Button>Create A New Event</Button>
+                    <ul>{organizerEvents}</ul>
+                    <Link to={`/users/${userId}/events/new`}><Button>Create A New Event</Button></Link>
                     <h1>Events You've Attended</h1>
                     <Events>
-                        
-                        {attendeeEvents}
+
+                        <p>{attendeeEvents}</p>
                     </Events>
-                    
+
                 </div>
             </div>
         );

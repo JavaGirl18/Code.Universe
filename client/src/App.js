@@ -48,10 +48,21 @@ class App extends Component {
 
 
   addNewEventToEventsList = (newEvent, userId) => {
-    axios.post(`/api/events`, newEvent, userId).then((res) => {
+    axios.post(`/api/users/${userId}/events`, newEvent, userId).then((res) => {
       this.getUsers()
     })
   }
+
+  deleteUser = (userId) => {
+
+    axios.delete(`/api/users/${userId}`).then((res) => {
+
+        this.setState({
+            users: res.data
+        })
+
+    })
+}
 
   render() {
     const HomePage = (props) => {
@@ -76,7 +87,7 @@ class App extends Component {
     }
     const ShowUser = (props) => {
       return (
-        <User {...props} />
+        <User {...props} deleteUser={this.deleteUser} />
       )
     }
     const NewEvents = (props) => {
@@ -89,6 +100,7 @@ class App extends Component {
         <NewUser addNewUserToUsersList={this.addNewUserToUsersList}{...props} />
       )
     }
+    
 
     return (
       <Router>
