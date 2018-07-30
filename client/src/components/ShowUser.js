@@ -20,6 +20,12 @@ const EventList = styled.div`
 display: inline flex;
 padding:10px;
 `
+const Profile = styled.div`
+float: right;
+`
+const OrgEvents = styled.div`
+margin-top:50px;
+`
 class ShowUser extends Component {
     state = {
         user: {},
@@ -60,19 +66,13 @@ class ShowUser extends Component {
 
     }
 
-    deleteEvent = () => {
-        const orgEventId = this.state.organizerEvents.id
-        console.log(this.state.organizerEvents._id)
+    deleteEvent = (eventId) => {
+        console.log(eventId)
         //make a delete request to our copy of the api using the params to identify specific idea
-        axios.delete(`/api/events/${orgEventId}`).then((res) => {
-            //setstate
-            this.setState({
-                //data matching user will be removed from the state.user
-                organizerEvents: res.data
-
+        axios.delete(`/api/events/${eventId}`)
+            .then((res) => {
+                this.getUser(this.state.user.id)
             })
-            // this.getUsers()
-        })
     }
 
     handleUpdate = (event) => {
@@ -131,7 +131,7 @@ class ShowUser extends Component {
         const eventId = this.props.match.eventId
         const eventlist = this.state.events.map((event, index) => {
             const eventId = event.id
-            
+
             return (
                 <div key={index}>
 
@@ -145,34 +145,34 @@ class ShowUser extends Component {
 
 
 
-       const listOfOrganizerEvents = this.state.organizerEvents || []
-       console.log(listOfOrganizerEvents)
+        const listOfOrganizerEvents = this.state.organizerEvents || []
+        console.log(listOfOrganizerEvents)
         const organizerEvents = listOfOrganizerEvents.map((orgEvent, index) => {
             const eventId = orgEvent.id
             const eachEvent = `/events/${eventId}`
             console.log(orgEvent)
             return (
-              
+
                 <EventList key={index}>
 
-    
-                        <Card.Group>
-                            <Card>
-                                <Card.Content>
-                                    <i class='thumbtack icon' />
-                                    <Link to=''> <Card.Header>{orgEvent.title}</Card.Header></Link>
-                                    <Card.Meta>{orgEvent.date}</Card.Meta>
-                                
-                                    <Card.Content extra>
-                                        <div className='ui two buttons'>
-                                            <Link to={eachEvent}><Button basic color='green'>View</Button></Link>
-                                            <Button basic color='red' onClick={() => this.deleteEvent(this.state.organizerEvents[index].eventId)}>Cancel Event</Button>
-                                        </div>
-                                    </Card.Content>
+
+                    <Card.Group>
+                        <Card>
+                            <Card.Content>
+                                <i class='thumbtack icon' />
+                                <Link to=''> <Card.Header>{orgEvent.title}</Card.Header></Link>
+                                <Card.Meta>{orgEvent.date}</Card.Meta>
+
+                                <Card.Content extra>
+                                    <div className='ui two buttons'>
+                                        <Link to={eachEvent}><Button basic color='green'>View</Button></Link>
+                                        <Button basic color='red' onClick={() => this.deleteEvent(this.state.organizerEvents[index].id)}>Cancel Event</Button>
+                                    </div>
                                 </Card.Content>
-                            </Card>
-                        </Card.Group>
-                
+                            </Card.Content>
+                        </Card>
+                    </Card.Group>
+
                 </EventList>
             )
         })
@@ -212,7 +212,7 @@ class ShowUser extends Component {
 
             <div>
 
-                <div>
+                <Profile>
 
                     <List>
                         <List.Item>
@@ -226,27 +226,27 @@ class ShowUser extends Component {
                             </List.Content>
                             <List.Item>
                                 <Number>
-                                <List.Icon name='phone' />
-                                <List.Content>{this.state.user.number}
-                                </List.Content></Number>
+                                    <List.Icon name='phone' />
+                                    <List.Content>{this.state.user.number}
+                                    </List.Content></Number>
                             </List.Item>
 
                         </List.Item>
                     </List>
-
-
                     <button onClick={this.toggleButton}>Update Profile</button>{this.state.editUser ? updateForm : null}
                     <button onClick={() => this.deleteUser(this.props.match.params.userId)}>Delete Profile</button>
-                    <h1>Events You've Organized</h1>
-                    <ul>{organizerEvents}</ul>
-                    <Link to={`/users/${userId}/events/new`}><Button>Create A New Event</Button></Link>
-                    <h1>Events You've Attended</h1>
+                </Profile>
+                <OrgEvents>
+                    <center> <h1>Events You've Organized</h1><Link to={`/users/${userId}/events/new`}><Button>Create A New Event</Button></Link>
+                        <ul>{organizerEvents}</ul></center>
+                </OrgEvents>
+                <center><h1>Events You've Attended</h1>
                     <Events>
 
                         <p>{attendeeEvents}</p>
-                    </Events>
+                    </Events></center>
 
-                </div>
+
             </div>
         );
     }

@@ -25,7 +25,7 @@ class ShowEvent extends Component {
         event: {},
         organizers: [],
         posts: [],
-        // attendees: []
+        attendees: []
     }
 
     componentDidMount() {
@@ -45,7 +45,7 @@ class ShowEvent extends Component {
         axios.get(`/api/events/${eventId}`)
             .then(res => {
                 console.log("response from api", res.data)
-                this.setState({ event: res.data.event, organizers: res.data.organizers, posts: res.data.posts })
+                this.setState({ event: res.data.event, organizers: res.data.organizers, posts: res.data.posts, atttendees: res.data.attendees })
                 // console.log(this.state)
 
             })
@@ -61,6 +61,7 @@ class ShowEvent extends Component {
 
 
     render() {
+      console.log(this.state.attendees.length)
         const eventId = this.props.match.eventId
         const organizerlist = this.state.organizers.map((organizer, index) => {
             const organizerId = organizer.id
@@ -130,12 +131,11 @@ class ShowEvent extends Component {
 <p>Location: {this.state.event.location}</p>
     <FlexBox>
         <p>Date: {this.state.event.date} Time: </p>
-
         <p> {this.state.event.time}</p>
         <button>RSVP to this event</button>
     </FlexBox>
     <p> Details: {this.state.event.details}</p>
-    
+    Number of Attendees: {this.state.attendees}
  { postlist }
 
             </div >

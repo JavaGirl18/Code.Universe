@@ -12,10 +12,10 @@ def show
   render json:@attendee
 end
 
-
-
+def create
+  @event = Event.find(params[:event_id])
+  @user = User.find(params[:user_id])
+  @attendee = Attendee.create(user:@user, event: @event)
+end
 end
 
-# @user = User.find(params[:id])
-# @posts= @user.posts
-# render json: {user:@user, posts:@posts}

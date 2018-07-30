@@ -48,14 +48,14 @@ class App extends Component {
 
 
   addNewEventToEventsList = (newEvent, userId) => {
-    console.log(userId)
+  
     axios.post(`/api/users/${userId}/events`, newEvent).then((res) => {
       this.getUsers()
     })
   }
 
   deleteUser = (userId) => {
-
+  console.log(userId)
     axios.delete(`/api/users/${userId}`).then((res) => {
 
         this.setState({

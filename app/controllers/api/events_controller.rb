@@ -21,7 +21,7 @@ class Api::EventsController < ApplicationController
 
                 custom_post
             end
-            render json: {event:@event, organizers: @organizers, posts:@posts}
+            render json: {event:@event, organizers: @organizers, posts:@posts, attendees: @attendee}
 
           
         end
@@ -40,7 +40,7 @@ class Api::EventsController < ApplicationController
         end
     
         def destroy
-            @event= Event.find(params[:id]).delete
+            @event = Event.find(params[:id]).destroy
             render status: :ok
         end
     
