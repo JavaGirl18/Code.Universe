@@ -27,12 +27,16 @@ background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPW
 color:white;
 padding:10px;
 height:150px;
+margin-top:-150px;
 // position:relative;
 `
 const OrgEvents = styled.div`
 margin-top:150px;
 // display: flex;
 // flex-wrap:wrap;
+`
+const OrganizedEvents = styled.div`
+margin-top: 50px;
 `
 class ShowUser extends Component {
     state = {
@@ -286,13 +290,15 @@ class ShowUser extends Component {
                     <button onClick={this.toggleButton}>Update Profile</button>{this.state.editUser ? updateForm : null}
                     <button onClick={() => this.deleteUser(this.props.match.params.userId)}>Delete Profile</button>
                 </Profile>
-               <center><h1>Events You've Organized</h1>
-                    <OrgEvents>
+               <center>
+                    <OrgEvents><h1>Events You Are Organizing</h1>
+                    <hr></hr>
                     <Link to={`/users/${userId}/events/new`}><Button>Create A New Event</Button></Link>
 
                    <p>{organizerEvents}</p>
                 </OrgEvents></center> 
-                <center><h1>Events You've Attended</h1>
+                <center><h1>Events You've RSVP'd to: </h1>
+                <hr></hr>
                     <Events>
 
                         <p>{attendeeEvents}</p>

@@ -136,6 +136,7 @@ class ShowEvent extends Component {
             <div>
                 {this.state.event.title}
                 < hr ></hr >
+                <button>Profile </button>
                 <OrgTitle>
                     <h4> Organizers: </h4>
                 </OrgTitle>
