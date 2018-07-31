@@ -2,7 +2,12 @@ import React, { Component } from 'react';
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { List } from 'semantic-ui-react'
+import styled from 'styled-components'
 
+
+const EventsList = styled.div`
+margin-top:30px;
+`
 class Events extends Component {
 
     state = {
@@ -38,9 +43,10 @@ class Events extends Component {
                             <List.Icon name='marker' />
                             <List.Content>
                                 <Link to={eachEvent}><List.Header as='a'>{event.title}</List.Header></Link>
+                                
                                 <List.Description> Date:
                                      {event.date} Time: {event.time}
-                                </List.Description>
+                                </List.Description><hr></hr>
                             </List.Content>
                         </List.Item>
                     </List>
@@ -52,8 +58,9 @@ class Events extends Component {
             <div>
                 <h1>Upcoming Events</h1>
                 <hr></hr>
-                {eventslist}
-
+                <EventsList>
+            {eventslist}
+</EventsList>
 
             </div>
         );

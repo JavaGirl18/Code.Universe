@@ -68,14 +68,13 @@ class App extends Component {
     })
   }
 
-  addNewAttendeeToAttendeesList = (newAttendee) => {
+  addNewAttendeeToAttendeesList = (newAttendee, eventId) => {
     // const attendeesList = [...this.state.attendees]
     // attendeesList.push(newAttendee)
-    const eventId = this.props.match.params.eventId
     axios.post(`/api/events/${eventId}/attendees`, newAttendee).then(res => {
         console.log(newAttendee)
         this.setState({attendeeId: res.data.id})
-        this.getEvent(eventId)
+        // this.getEvent(eventId)
     })
 
 }
