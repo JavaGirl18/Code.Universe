@@ -8,6 +8,7 @@ import Events from './components/Events'
 import Event from './components/ShowEvent'
 import User from './components/ShowUser'
 import NewEvent from './components/NewEvent'
+import NewPost from './components/NewPost'
 import NewUser from './components/NewUser'
 import './App.css';
 
@@ -52,6 +53,12 @@ class App extends Component {
   }
 
 
+  addNewPostToPostsList = (newPost, eventId) => {
+
+    axios.post(`/api/events/${eventId}/posts`, newPost).then((res) => {
+      this.getUsers()
+    })
+  }
 
   addNewEventToEventsList = (newEvent, userId) => {
 
@@ -129,6 +136,11 @@ console.log(loggedUser)
         <NewEvent addNewEventToEventsList={this.addNewEventToEventsList}{...props} />
       )
     }
+    const NewPosts = (props) => {
+      return (
+        <NewPost addNewPostToPostsList={this.addNewPostToPostsList}{...props} />
+      )
+    }
     const NewUser = (props) => {
       return (
         <NewUser addNewUserToUsersList={this.addNewUserToUsersList}{...props} />
@@ -152,6 +164,7 @@ console.log(loggedUser)
             <Route exact path='/users/:userId' render={ShowUser} />
             <Route exact path='/users/new' render={NewUser} />
             <Route exact path='/users/:userId/events/new' render={NewEvents} />
+           <Route exact path='/events/:eventId/posts/new' render={NewPosts} />
           </Switch>
 
         </div>

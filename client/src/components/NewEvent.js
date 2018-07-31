@@ -13,7 +13,7 @@ margin-top:50px;
 `
 
 const Body = styled.div`
-background-color: black;
+
 `
 class NewEvent extends Component {
     state = {

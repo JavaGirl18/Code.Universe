@@ -14,15 +14,24 @@ width:1000px;
 const Title = styled.div`
 max-width: 300px;
 height:50px;
-border:solid;
+// border:solid;
 display:flex;
-font-size: 10px;
+font-size: 20px;
 `
 const OrgTitle = styled.div`
 
 `
-const OrgList = styled.div`
+const Details = styled.div`
 border:solid;
+background-image: url("https://images.unsplash.com/photo-1506611302792-8e9fdb8c4edf?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=7fec914a30ecb05636c3d2085b4c3e27&auto=format&fit=crop&w=500&q=60");
+background-size: cover;
+width:500px;
+height:320px;
+color: white;
+padding:25px;
+`
+const OrgList = styled.div`
+margin-right: 20px;
 `
 class ShowEvent extends Component {
     state = {
@@ -90,8 +99,8 @@ class ShowEvent extends Component {
                 <div key={index}>
 
                     <ul>
-                        <Link to={eachOrganizer}> {organizer.name} </Link>
-                        {organizer.email}
+                       Name:  <Link to={eachOrganizer}> {organizer.name} </Link>
+                       Email:  {organizer.email}
                     </ul>
 
                 </div>
@@ -109,15 +118,16 @@ class ShowEvent extends Component {
                 <Post key={index}>
                     <ul>
 
-                        <Card>
+                        <Card fluid>
                             <Card.Content>
 
-                                <Image floated='right' size='mini' src={post.organizer && post.organizer.photo} />
-                                <Image floated='left' size='mini' src={post.attendee && post.attendee.photo} />
+                                <Image floated='right' size='medium' src={post.organizer && post.organizer.photo} avatar/> ||
+                                <Image floated='left' size='medium' src={post.attendee && post.attendee.photo} avatar />
                                 <Card.Header>{post.attendee && post.attendee.name}</Card.Header>
-                                <Card.Meta>{post.title}</Card.Meta>
-                                <Card.Description>
-                                    <Title>    {post.comment}</Title>
+                                <Card.Header>{post.organizer && post.organizer.name}</Card.Header>
+                                <Card.Meta><center><strong>{post.title}</strong></center></Card.Meta>
+                               <Card.Description>
+                                   <center>  {post.comment}</center>
                                 </Card.Description>
                             </Card.Content>
                         </Card>
@@ -132,27 +142,30 @@ class ShowEvent extends Component {
 
 
         return (
-
-            <div>
-                {this.state.event.title}
+<div>
+          <center> <Details>
+              <h2> {this.state.event.title}   </h2>    <button onClick={() => this.addNewAttendeeToAttendeesList(this.props.loggedUser)}>RSVP to this event</button>          
+                <p>Number of Attendees:{this.state.length.length}</p>
                 < hr ></hr >
-                <button>Profile </button>
+                <button>Go to Profile </button>
                 <OrgTitle>
-                    <h4> Organizers: </h4>
+                  <h4> Organizers: </h4>
                 </OrgTitle>
                 <OrgList>
                 {organizerlist}
                 </OrgList>
             <p>Location: {this.state.event.location}</p>
-            <FlexBox>
-                <p>Date: {this.state.event.date} Time: </p>
-                <p> {this.state.event.time}</p>
-                <button onClick={() => this.addNewAttendeeToAttendeesList(this.props.loggedUser)}>RSVP to this event</button>
-            </FlexBox>
-            <p> Details: {this.state.event.details}</p>
-                Number of Attendees:{this.state.length.length}
           
-        { postlist }
+                <p>Date: {this.state.event.date} </p>
+                <p> Time: {this.state.event.time}</p>
+         
+            <p> Details: {this.state.event.details}</p>
+            </Details></center> 
+           
+         <center> <h2>Comments</h2><Link to ={`/events/${this.state.event.id}/posts/new`}>
+          <button>Post New Comment</button></Link></center>
+          <hr></hr>
+       <center>{ postlist }</center> 
 
             </div >
         );
