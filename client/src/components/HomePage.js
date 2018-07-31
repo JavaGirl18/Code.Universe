@@ -19,7 +19,9 @@ position: relative;
 const Text = styled.div`
 position: absolute;
 color: white;
-margin-top:-50px;
+margin-top:-300px;
+margin-left: 500px;
+font-size:60px;
 `
 const Sign = styled.div`
 margin-top: 20px;
@@ -56,7 +58,7 @@ class HomePage extends Component {
                     <img src='https://pre00.deviantart.net/c5fc/th/pre/f/2014/053/e/2/free_space_galaxy_texture_by_lyshastra-d77gh54.jpg' />
 
                 </Img>
-                <Text>Home</Text>
+               <Text><h1>May the Code Be With You</h1></Text>
 
 
                 <center><Sign>

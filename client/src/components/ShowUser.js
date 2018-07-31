@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios'
 import { Button, Card, Form, List } from 'semantic-ui-react'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 
 const Events = styled.div`
 display: flex;
@@ -22,9 +22,17 @@ padding:10px;
 `
 const Profile = styled.div`
 float: right;
+border:dashed;
+background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPWj2DFp3PdZDEjbbb7QQyxuBJucS4w2Ava_wfhlYURzoe5p6u");
+color:white;
+padding:10px;
+height:150px;
+// position:relative;
 `
 const OrgEvents = styled.div`
-margin-top:50px;
+margin-top:150px;
+// display: flex;
+// flex-wrap:wrap;
 `
 class ShowUser extends Component {
     state = {
@@ -32,7 +40,8 @@ class ShowUser extends Component {
         events: [],
         organizerEvents: [],
         attendeeEvents: [],
-        editUser: false
+        editUser: false,
+        redirect: false
     }
 
 
@@ -101,12 +110,17 @@ class ShowUser extends Component {
         const canEdit = !this.state.editUser
         this.setState({ editUser: canEdit })
     }
+    toggleButton2 = () => {
+        const canEdit = !this.state.editUser
+        this.setState({ editUser: canEdit })
+    }
     deleteUser = (userId) => {
         this.props.deleteUser(userId)
         this.setState({ redirect: true })
     }
 
     render() {
+        
         const userId = this.props.match.params.userId
 
         const updateForm = (<Form onSubmit={this.submitUpdate}>
@@ -128,6 +142,10 @@ class ShowUser extends Component {
         </Form>)
 
 
+
+        
+
+
         // const eventId = this.props.match.eventId
         const eventlist = this.state.events.map((event, index) => {
             const eventId = event.id
@@ -138,6 +156,7 @@ class ShowUser extends Component {
                     <ul>
                         {/* <Link to={eachOrganizer}> {organizer.name} </Link> */}
                         {event.title}
+                       
                     </ul>
                 </div>
             )
@@ -152,7 +171,7 @@ class ShowUser extends Component {
             const eachEvent = `/events/${eventId}`
             console.log(orgEvent)
             return (
-
+<div>
                 <EventList key={index}>
 
 
@@ -174,6 +193,37 @@ class ShowUser extends Component {
                     </Card.Group>
 
                 </EventList>
+
+
+{/* <Form onSubmit={this.submitUpdateEvent}>
+    <Form.Field widths='equal'>
+        <label fluid label="name">Event Title</label>
+        <input type="text" name="title" placeholder='Event Title' value={orgEvent.title} onChange={this.handleUpdateEvent} />
+    </Form.Field>
+    <Form.Field widths='equal'>
+        <label fluid label="location">Location</label>
+        <input type="text" name="location" placeholder='Location' value={orgEvent.location} onChange={this.handleUpdateEvent} />
+    </Form.Field>
+    <Form.Field widths='equal'>
+
+        <label fluid label="Date">Date</label>
+        <input type="date" name="date" value={orgEvent.date} onChange={this.handleUpdateEvent} />
+    </Form.Field>
+    <Form.Field widths='equal'>
+
+        <label fluid label="Date">Time</label>
+        <input type="time" name="time" value={orgEvent.time} onChange={this.handleUpdateEvent} />
+    </Form.Field>
+    <Form.Field widths='equal'>
+        <label fluid label="location">Details</label>
+        <input type="text" name="details" placeholder='details' value={orgEvent.details} onChange={this.handleUpdateEvent} />
+    </Form.Field>
+    <Form.Field>
+        <button type='submit' value="Update Event" inverted>Submit</button></Form.Field>
+</Form>
+
+                 <button onClick={this.toggleButton2}>Update Event</button>{this.state.editUser ? updateForm : null} */}
+                 </div>
             )
         })
 
@@ -217,7 +267,7 @@ class ShowUser extends Component {
                     <List>
                         <List.Item>
                             <List.Icon name='users' />
-                            <List.Content>{this.state.user.name}</List.Content>
+                            <List.Content><strong><h2>{this.state.user.name}</h2></strong></List.Content>
                         </List.Item>
                         <List.Item>
                             <List.Icon name='mail' />
@@ -236,10 +286,12 @@ class ShowUser extends Component {
                     <button onClick={this.toggleButton}>Update Profile</button>{this.state.editUser ? updateForm : null}
                     <button onClick={() => this.deleteUser(this.props.match.params.userId)}>Delete Profile</button>
                 </Profile>
-                <OrgEvents>
-                    <center> <h1>Events You've Organized</h1><Link to={`/users/${userId}/events/new`}><Button>Create A New Event</Button></Link>
-                        <ul>{organizerEvents}</ul></center>
-                </OrgEvents>
+               <center><h1>Events You've Organized</h1>
+                    <OrgEvents>
+                    <Link to={`/users/${userId}/events/new`}><Button>Create A New Event</Button></Link>
+
+                   <p>{organizerEvents}</p>
+                </OrgEvents></center> 
                 <center><h1>Events You've Attended</h1>
                     <Events>
 

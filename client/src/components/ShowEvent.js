@@ -17,7 +17,12 @@ height:50px;
 border:solid;
 display:flex;
 font-size: 10px;
+`
+const OrgTitle = styled.div`
 
+`
+const OrgList = styled.div`
+border:solid;
 `
 class ShowEvent extends Component {
     state = {
@@ -25,7 +30,7 @@ class ShowEvent extends Component {
         organizers: [],
         posts: [],
         attendees: [],
-      
+        length: 0 
     }
 
     componentDidMount() {
@@ -33,7 +38,7 @@ class ShowEvent extends Component {
         // this.props.getProject(projectId)
 
         if (this.props.match.params) {
-         const loggedUser = this.props.loggedUser
+            const loggedUser = this.props.loggedUser
             const eventId = this.props.match.params.eventId
             this.getEvent(eventId, loggedUser)
 
@@ -45,8 +50,8 @@ class ShowEvent extends Component {
         axios.get(`/api/events/${eventId}`)
             .then(res => {
                 console.log("response from api", res.data)
-                this.setState({ event: res.data.event, organizers: res.data.organizers, posts: res.data.posts, atttendees: res.data.attendees })
-                // console.log(this.state)
+                this.setState({ event: res.data.event, organizers: res.data.organizers, posts: res.data.posts, atttendees: res.data.attendees, length: res.data.attendees })
+                console.log(this.state.attendees)
 
             })
             .catch((err) => {
@@ -59,8 +64,9 @@ class ShowEvent extends Component {
     addNewAttendeeToAttendeesList = (newAttendee) => {
         // const attendeesList = [...this.state.attendees]
         // attendeesList.push(newAttendee)
-const eventId = this.props.match.params.eventId
+        const eventId = this.props.match.params.eventId
         axios.post(`/api/events/${eventId}/attendees`, newAttendee).then(res => {
+            console.log(newAttendee)
             this.getEvent(eventId)
         })
 
@@ -70,8 +76,12 @@ const eventId = this.props.match.params.eventId
 
 
     render() {
+
+
+
+        console.log(this.state.length)
         // console.log(this.state.loggedUser)
-        console.log(this.state.attendees.length)
+        // console.log(this.state.attendees.length)
         const eventId = this.props.match.eventId
         const organizerlist = this.state.organizers.map((organizer, index) => {
             const organizerId = organizer.id
@@ -87,25 +97,9 @@ const eventId = this.props.match.params.eventId
                 </div>
             )
         })
+      
+      
 
-
-        // const updateForm = (<Form onSubmit={this.submitUpdate}>
-        //     <Form.Field widths='equal'>
-        //         <label fluid label="title">Event Title</label>
-        //         <input type="text" name="title" placeholder='Event Title' value={this.state.event.name} onChange={this.handleUpdate} />
-        //     </Form.Field>
-        //     <Form.Field widths='equal'>
-        //         <label fluid label="email">Event Location</label>
-        //         <input type="text" name="email" placeholder='Location' value={this.state.event.location} onChange={this.handleUpdate} />
-        //     </Form.Field>
-        //     <Form.Field widths='equal'>
-
-        //         <label fluid label="title">Number</label>
-        //         <input type="number" name="number" value={this.state.user.number} onChange={this.handleUpdate} />
-        //     </Form.Field>
-        //     <Form.Field>
-        //         <button type='submit' value="Update Profile" inverted>Submit</button></Form.Field>
-        // </Form>)
 
 
         const postlist = this.state.posts.map((post, index) => {
@@ -129,21 +123,7 @@ const eventId = this.props.match.params.eventId
                         </Card>
 
                     </ul>
-                    {/* <ul>
-                     
-                        <Card>
-                            <Card.Content>
-                            <Image floated='left' size='mini' src={post.organizer && post.organizer.photo}/>
-                            <Card.Header>{post.organizer && post.organizer.name}</Card.Header>
-                            <Card.Meta>{post.title}</Card.Meta>
-                            <Card.Description>
-                                    {post.comment}
-                                </Card.Description>
-                            </Card.Content>
-
-                        </Card>
-                 
-                    </ul> */}
+    
                 </Post>
 
             )
@@ -156,17 +136,22 @@ const eventId = this.props.match.params.eventId
             <div>
                 {this.state.event.title}
                 < hr ></hr >
-                <h4> Organizers: </h4>{organizerlist}
-
-                <p>Location: {this.state.event.location}</p>
-                <FlexBox>
-                    <p>Date: {this.state.event.date} Time: </p>
-                    <p> {this.state.event.time}</p>
-                    <button onClick={() => this.addNewAttendeeToAttendeesList(this.props.loggedUser)}>RSVP to this event</button>
-                </FlexBox>
-                <p> Details: {this.state.event.details}</p>
-                Number of Attendees: {this.state.attendees}
-                {postlist}
+                <OrgTitle>
+                    <h4> Organizers: </h4>
+                </OrgTitle>
+                <OrgList>
+                {organizerlist}
+                </OrgList>
+            <p>Location: {this.state.event.location}</p>
+            <FlexBox>
+                <p>Date: {this.state.event.date} Time: </p>
+                <p> {this.state.event.time}</p>
+                <button onClick={() => this.addNewAttendeeToAttendeesList(this.props.loggedUser)}>RSVP to this event</button>
+            </FlexBox>
+            <p> Details: {this.state.event.details}</p>
+                Number of Attendees:{this.state.length.length}
+          
+        { postlist }
 
             </div >
         );

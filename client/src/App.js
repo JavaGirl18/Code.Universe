@@ -95,7 +95,7 @@ class App extends Component {
     loggedUser[attributeName] = attributeValue
 
     this.setState({ loggedUser })
-
+console.log(loggedUser)
   }
 
   render() {
@@ -141,7 +141,7 @@ class App extends Component {
         <div>
 
           {this.state.loggedInstate ?
-            <Redirect to={`/events`} /> :
+            <Redirect to={`/users/${userId}`} /> :
             null}
 
           <NavBar />
@@ -152,8 +152,8 @@ class App extends Component {
             <Route exact path='/users/:userId' render={ShowUser} />
             <Route exact path='/users/new' render={NewUser} />
             <Route exact path='/users/:userId/events/new' render={NewEvents} />
-
           </Switch>
+
         </div>
       </Router>
     );

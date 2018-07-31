@@ -32,7 +32,10 @@ class NavBar extends Component {
 
                 <h1>Code Universe</h1>
                 <div>
-                    <div><Link to="/">Sign Up</Link></div>
+                    <div><Link to="/">Phone Home</Link></div>
+                </div>
+                <div>
+                    <div><Link to="/events">Events</Link></div>
                 </div>
 
             </Nav>

@@ -8,7 +8,8 @@ class Api::EventsController < ApplicationController
         def show
             @event = Event.find(params[:id])
             @organizers = @event.users
-            @attendee = @event.attendees
+            @attendee = @event.attendees 
+               
             @posts = @event.posts.map do |post|
                 custom_post = {
                     id: post.id,
