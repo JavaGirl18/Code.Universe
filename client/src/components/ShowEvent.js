@@ -9,7 +9,7 @@ display: flex;
 
 `
 const Post = styled(Card.Description)`
-//    text-wrap: normal; 
+width:1000px;
 `
 const Title = styled.div`
 max-width: 300px;

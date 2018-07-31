@@ -141,7 +141,7 @@ console.log(loggedUser)
         <div>
 
           {this.state.loggedInstate ?
-            <Redirect to={`/users/${userId}`} /> :
+            <Redirect to={`/users/${this.state.userId}`} /> :
             null}
 
           <NavBar />
