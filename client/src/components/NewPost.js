@@ -45,6 +45,8 @@ class NewPost extends Component {
 
 
     render() {
+        // console.log("params", this.params.match.params)
+
         console.log("new events")
         if (this.state.redirect) {
             console.log('redirecting')

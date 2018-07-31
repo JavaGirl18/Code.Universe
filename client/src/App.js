@@ -24,7 +24,8 @@ class App extends Component {
       password: ''
     },
     loggedInstate: false,
-    userId: ''
+    userId: '',
+    attendeeId: null
   }
 
   componentDidMount() {
@@ -54,7 +55,7 @@ class App extends Component {
 
 
   addNewPostToPostsList = (newPost, eventId) => {
-
+    newPost.attendee_id = this.state.attendeeId
     axios.post(`/api/events/${eventId}/posts`, newPost).then((res) => {
       this.getUsers()
     })
@@ -66,6 +67,18 @@ class App extends Component {
       this.getUsers()
     })
   }
+
+  addNewAttendeeToAttendeesList = (newAttendee) => {
+    // const attendeesList = [...this.state.attendees]
+    // attendeesList.push(newAttendee)
+    const eventId = this.props.match.params.eventId
+    axios.post(`/api/events/${eventId}/attendees`, newAttendee).then(res => {
+        console.log(newAttendee)
+        this.setState({attendeeId: res.data.id})
+        this.getEvent(eventId)
+    })
+
+}
 
   deleteUser = (userId) => {
     console.log(userId)
@@ -123,7 +136,7 @@ console.log(loggedUser)
     }
     const ShowEvent = (props) => {
       return (
-        <Event userId = {this.state.userId}loggedUser={this.state.loggedUser}{...props} />
+        <Event   addNewAttendeeToAttendeesList= {this.addNewAttendeeToAttendeesList} userId = {this.state.userId}loggedUser={this.state.loggedUser}{...props} />
       )
     }
     const ShowUser = (props) => {
@@ -136,7 +149,7 @@ console.log(loggedUser)
         <NewEvent addNewEventToEventsList={this.addNewEventToEventsList}{...props} />
       )
     }
-    const NewPosts = (props) => {
+    const NewPosts = (props) =>{
       return (
         <NewPost addNewPostToPostsList={this.addNewPostToPostsList}{...props} />
       )

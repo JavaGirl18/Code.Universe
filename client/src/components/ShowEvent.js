@@ -73,16 +73,16 @@ class ShowEvent extends Component {
 
 
     }
-    addNewAttendeeToAttendeesList = (newAttendee) => {
-        // const attendeesList = [...this.state.attendees]
-        // attendeesList.push(newAttendee)
-        const eventId = this.props.match.params.eventId
-        axios.post(`/api/events/${eventId}/attendees`, newAttendee).then(res => {
-            console.log(newAttendee)
-            this.getEvent(eventId)
-        })
+    // addNewAttendeeToAttendeesList = (newAttendee) => {
+    //     // const attendeesList = [...this.state.attendees]
+    //     // attendeesList.push(newAttendee)
+    //     const eventId = this.props.match.params.eventId
+    //     axios.post(`/api/events/${eventId}/attendees`, newAttendee).then(res => {
+    //         console.log(newAttendee)
+    //         this.getEvent(eventId)
+    //     })
 
-    }
+    // }
 
 
 
@@ -150,7 +150,7 @@ class ShowEvent extends Component {
         return (
             <div>
                 <center> <Details>
-                    <h2> {this.state.event.title}   </h2>    <button onClick={() => this.addNewAttendeeToAttendeesList(this.props.loggedUser)}>RSVP to this event</button>
+                    <h2> {this.state.event.title}   </h2>    <button onClick={() => this.props.addNewAttendeeToAttendeesList(this.props.loggedUser)}>RSVP to this event</button>
                     <p>Number of Attendees:{this.state.length.length}</p>
                     < hr ></hr >
                     <button>Go to Profile </button>
