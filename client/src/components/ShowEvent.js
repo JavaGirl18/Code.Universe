@@ -62,7 +62,7 @@ class ShowEvent extends Component {
         axios.get(`/api/events/${eventId}`)
             .then(res => {
                 console.log("response from api", res.data)
-                this.setState({ event: res.data.event, organizers: res.data.organizers, posts: res.data.posts, atttendees: res.data.attendees, length: res.data.attendees })
+                this.setState({ event: res.data.event, organizers: res.data.organizers, posts: res.data.posts, atttendees: res.data.attendees, length: res.data.attendees.length })
                 console.log(this.state.attendees)
 
             })
@@ -91,7 +91,7 @@ class ShowEvent extends Component {
 
 
 
-        console.log(this.state.event.id)
+        console.log(this.state)
         // console.log(this.state.loggedUser)
         // console.log(this.state.attendees.length)
         const eventId = this.props.match.eventId
@@ -151,9 +151,9 @@ class ShowEvent extends Component {
             <div>
                 <center> <Details>
                     <h2> {this.state.event.title}   </h2>    <button onClick={() => this.props.addNewAttendeeToAttendeesList(this.props.loggedUser, this.props.match.params.eventId)}>RSVP to this event</button>
-                    <p>Number of Attendees:{this.state.length.length}</p>
+                    <p>Number of Attendees:{this.state.length}</p>
                     < hr ></hr >
-                    <button>Go to Profile </button>
+                    <Link to ={`/users/${this.props.match.params.userId}`}><button>Go to Profile </button></Link>
                     <OrgTitle>
                         <h4> Organizers: </h4>
                     </OrgTitle>
