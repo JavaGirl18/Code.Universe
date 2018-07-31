@@ -27,6 +27,7 @@ class Api::PostsController < ApplicationController
     end
 
     def create
+        puts "Imhere"
         @event = Event.find(params[:event_id])
     @post = @event.posts.create(post_params)
     render json: @post

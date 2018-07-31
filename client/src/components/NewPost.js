@@ -38,7 +38,7 @@ class NewPost extends Component {
 
         this
             .props
-            .addNewPostToPostsList(this.state.newPost, this.props.match.params.userId)
+            .addNewPostToPostsList(this.state.newPost, this.props.match.params.eventId, this.props.match.params.attendeeId)
 
         this.setState({ redirect: true })
     }

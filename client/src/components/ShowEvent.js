@@ -91,7 +91,7 @@ class ShowEvent extends Component {
 
 
 
-        console.log(this.state.length)
+        console.log(this.state.event.id)
         // console.log(this.state.loggedUser)
         // console.log(this.state.attendees.length)
         const eventId = this.props.match.eventId
