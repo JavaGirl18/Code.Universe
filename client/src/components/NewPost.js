@@ -45,12 +45,12 @@ class NewPost extends Component {
 
 
     render() {
-        // console.log("params", this.params.match.params)
+        console.log("params", this.props.match.params.eventId)
 
-        console.log("new events")
+        console.log("new events", this.props.match.params.eventId)
         if (this.state.redirect) {
             console.log('redirecting')
-            return <Redirect push to={'/events'} />
+            return <Redirect push to={`/events/${this.props.match.params.eventId}`} />
         }
         return (
             <div>
