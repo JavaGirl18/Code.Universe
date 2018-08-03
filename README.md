@@ -28,8 +28,8 @@ Click to view User Story on Trello: <https://trello.com/b/744pwCbd/codeuniverse>
 
 
 # Wire Frame
-![Wireframe](public/images/CU_Wireframe.jpg)
+![Wireframe](public/Images/CU_Wireframe.jpg)
 
 
 # ERD
-![ERD](public/images/CU_ERD.jpg)
+![ERD](public/Images/CU_ERD.jpg)
