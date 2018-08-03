@@ -153,7 +153,7 @@ class ShowEvent extends Component {
                     <h2> {this.state.event.title}   </h2>    <button onClick={() => this.props.addNewAttendeeToAttendeesList(this.props.loggedUser, this.props.match.params.eventId, this.length)}>RSVP to this event</button>
                     <p>Number of Attendees:{this.state.length}</p>
                     < hr ></hr >
-                    <Link to ={`/users/${this.props.match.params.userId}`}><button>Go to Profile </button></Link>
+                    <Link to ={`/users/${this.props.userId}`}><button>Go to Profile </button></Link>
                     <OrgTitle>
                         <h4> Organizers: </h4>
                     </OrgTitle>
