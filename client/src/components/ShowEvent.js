@@ -150,7 +150,7 @@ class ShowEvent extends Component {
         return (
             <div>
                 <center> <Details>
-                    <h2> {this.state.event.title}   </h2>    <button onClick={() => this.props.addNewAttendeeToAttendeesList(this.props.loggedUser, this.props.match.params.eventId)}>RSVP to this event</button>
+                    <h2> {this.state.event.title}   </h2>    <button onClick={() => this.props.addNewAttendeeToAttendeesList(this.props.loggedUser, this.props.match.params.eventId, this.length)}>RSVP to this event</button>
                     <p>Number of Attendees:{this.state.length}</p>
                     < hr ></hr >
                     <Link to ={`/users/${this.props.match.params.userId}`}><button>Go to Profile </button></Link>

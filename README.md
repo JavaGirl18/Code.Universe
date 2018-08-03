@@ -1,24 +1,35 @@
-# README
+# getItDone!
+Click to Launch Project:  <https://code-universe.herokuapp.com/>   
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Click to view User Story on Trello: <https://trello.com/b/744pwCbd/codeuniverse>
 
-Things you may want to cover:
 
-* Ruby version
+# Project Objective
+### Create awesome events for Coders!
 
-* System dependencies
+# Technologies Used
+* Programming Languages - Ruby, Javascript, HTML, CSS,
+* Framework: React, Ruby on Rails
+* Database: PostgreSQL
+* Visual Studio
+* iTerm
+* User Stories - Trello
+* Host & Deploy - Heroku
 
-* Configuration
 
-* Database creation
+# App Features
+* User Authentication
+* Update and delete Users
+* Create and delete Events
+* Create Posts
+* Splash Page
 
-* Database initialization
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
+# Wire Frame
+![Wireframe](public/images/Wireframe.jpg)
 
-* ...
+
+# ERD
+![ERD](public/images/ERD.jpg)

@@ -153,7 +153,7 @@ console.log(loggedUser)
         <NewPost addNewPostToPostsList={this.addNewPostToPostsList}{...props} />
       )
     }
-    const NewUser = (props) => {
+    const NewUsers = (props) => {
       return (
         <NewUser addNewUserToUsersList={this.addNewUserToUsersList}{...props} />
       )
@@ -173,8 +173,8 @@ console.log(loggedUser)
             <Route exact path='/' render={HomePage} />
             <Route exact path='/events' render={EventsPage} />
             <Route exact path='/events/:eventId' render={ShowEvent} />
+            <Route exact path='/users/new' render={NewUsers} />
             <Route exact path='/users/:userId' render={ShowUser} />
-            <Route exact path='/users/new' render={NewUser} />
             <Route exact path='/users/:userId/events/new' render={NewEvents} />
            <Route exact path='/events/:eventId/posts/new' render={NewPosts} />
           </Switch>

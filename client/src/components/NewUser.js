@@ -39,6 +39,7 @@ class NewUser extends Component {
 
     }
     render() {
+        console.log("new user")
         return (
             <div>
                 <Contain>
@@ -54,6 +55,10 @@ class NewUser extends Component {
                         <Form.Field widths='equal'>
                             <label fluid label="email">What's your Email?</label>
                             <input type="text" name="email" placeholder='Location' onChange={this.handleNewUserChange} />
+                        </Form.Field>
+                        <Form.Field widths='equal'>
+                            <label fluid label="password">Create a Password</label>
+                            <input type="text" name="password" placeholder='password' onChange={this.handleNewUserChange} />
                         </Form.Field>
                         <Form.Field widths='equal'>
 
