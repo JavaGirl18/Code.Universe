@@ -1,4 +1,4 @@
-# getItDone!
+# Code.Universe!
 Click to Launch Project:  <https://code-universe.herokuapp.com/>   
 
 Click to view User Story on Trello: <https://trello.com/b/744pwCbd/codeuniverse>
@@ -19,7 +19,7 @@ Click to view User Story on Trello: <https://trello.com/b/744pwCbd/codeuniverse>
 
 # App Features
 * User Authentication
-* Update and delete Users
+* Create, Update and Delete Users
 * Create and delete Events
 * Create Posts
 * Splash Page
@@ -28,8 +28,8 @@ Click to view User Story on Trello: <https://trello.com/b/744pwCbd/codeuniverse>
 
 
 # Wire Frame
-![Wireframe](public/images/Wireframe.jpg)
+![Wireframe](public/images/CU_Wireframe.jpg)
 
 
 # ERD
-![ERD](public/images/ERD.jpg)
+![ERD](public/images/CU_ERD.jpg)

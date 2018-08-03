@@ -1,32 +1,22 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-// import {
-//     Container,
-//     Divider,
-//     Dropdown,
-//     Grid,
-//     Header,
-//     Image,
-//     List,
-//     Menu,
-//     Segment,
-//   } from 'semantic-ui-react'
+import {
+    Container,
+    Divider,
+    Dropdown,
+    Grid,
+    Header,
+    Image,
+    List,
+    Menu,
+    Segment,
+  } from 'semantic-ui-react'
 
 
 
-const Nav = styled.div`
-border-bottom:solid; 
-background-color: white;
-color:black;   
-`
-const Links = styled.div`
-float: right;
-color: black;
-display:flex;
-h3{
-margin-left:20px;
-}
+const Back = styled.div`
+background-image:url("https://media.giphy.com/media/97ZkiqMSW8kW4/giphy.gif")
 `
 
 class NavBar extends Component {
@@ -34,22 +24,20 @@ class NavBar extends Component {
     render() {
         return (
           
-          <div>
-            <Nav>
+          <Back>
+    
 
-                <h1>Code Universe</h1>
-                <Links>
-                   <Link to="/"><h3>Phone Home</h3></Link>
-                
-                    <Link to="/events"><h3>Events</h3></Link>
-                </Links>
-
-            </Nav>
-
-
+<Segment clearing>
+    <Header as='h2' floated='right' color='red'>
+    <Link to="/events">Events</Link>
+    </Header>
+    <Header as='h2' floated='left'>
+    <Link to="/">Code.Universe</Link>
+    </Header>
+  </Segment>
  
 
-            </div>
+            </Back>
         );
     }
 }
