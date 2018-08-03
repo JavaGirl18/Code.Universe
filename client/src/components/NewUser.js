@@ -4,10 +4,11 @@ import { Form, Button } from 'semantic-ui-react'
 
 const Contain = styled.div`
 width: 30%;
-background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLangNhMmKjm1iMIMndEoj_I8xlIH3cAY-DU1_kcRyGGiTdZYe')
+background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQm3xiHqTf9ZODMYa-CTFcj7a-pZ049BwusMx8TdYdWRdH_PHjF");
 border:solid;
 padding:10px;
-
+background-size: cover;
+margin-top: 50px;
 `
 class NewUser extends Component {
 
@@ -42,8 +43,8 @@ class NewUser extends Component {
         console.log("new user")
         return (
             <div>
-                <Contain>
-                    <Form onSubmit={this.addNewUser}>
+               <center> <Contain>
+                  <center> <Form onSubmit={this.addNewUser} inverted>
                         <Form.Field widths='equal'>
                             <label fluid label="name">What's your First Name?</label>
                             <input type="text" name="name" placeholder='First Name' onChange={this.handleNewUserChange} />
@@ -66,8 +67,8 @@ class NewUser extends Component {
                             <input type="number" name="number" onChange={this.handleNewUserChange} />
                         </Form.Field>
                         <Button type='submit' value="Create New User" inverted>Submit</Button>
-                    </Form>
-                </Contain>
+                    </Form></center> 
+                </Contain></center>
             </div>
         );
     }

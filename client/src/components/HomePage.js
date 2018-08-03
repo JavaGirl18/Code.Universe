@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components'
 import { Form, Button, Checkbox } from 'semantic-ui-react'
-import { Redirect } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 
 const Back = styled.div`
 background-image: url("https://3c1703fe8d.site.internapcdn.net/newman/gfx/news/hires/aclusteranda.jpg");
@@ -19,7 +19,7 @@ position: relative;
 const Text = styled.div`
 position: absolute;
 color: white;
-margin-top:-300px;
+margin-top:-280px;
 margin-left: 300px;
 font-size:70px;
 `
@@ -27,6 +27,10 @@ const Sign = styled.div`
 margin-top: 20px;
 width: 50%;
 position: center;
+background-image: url("https://pre00.deviantart.net/c5fc/th/pre/f/2014/053/e/2/free_space_galaxy_texture_by_lyshastra-d77gh54.jpg");
+border: dashed;
+color: white;
+padding: 20px;
 `
 const Contain = styled.div`
 width: 30%;
@@ -59,11 +63,13 @@ class HomePage extends Component {
 
                 </Img>
                <Text><center>May the Code Be With You</center>
-               <hr></hr></Text>
+               <hr></hr>
+               <center> <h2><strong>Events for Coders. Explore Code.Universe</strong></h2></center>
+               </Text>
 
 
                 <center><Sign>
-                    <Form onSubmit={this.handleSubmit}>
+                    <Form onSubmit={this.handleSubmit} inverted>
                         <Form.Field>
                             <label>Email</label>
                             <input type="text" name="email" onChange={this.props.handleFindUser} />
@@ -76,6 +82,7 @@ class HomePage extends Component {
                             <Checkbox label='I agree to the Terms and Conditions' />
                         </Form.Field>
                         <Button type='submit'>Submit</Button>
+                       <h2>||</h2>  <Link to='/users/new'><Button>Sign Up</Button></Link>
                     </Form>
                 </Sign></center>
             </div>
