@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components'
 import { Form, Button } from 'semantic-ui-react'
+import {Redirect} from 'react-router-dom'
 
 const Contain = styled.div`
 width: 30%;
@@ -40,6 +41,11 @@ class NewUser extends Component {
 
     }
     render() {
+        console.log("home page")
+        if (this.state.redirect) {
+            console.log('redirecting')
+            return <Redirect push to={'/'} />
+        }
         console.log("new user")
         return (
             <div>

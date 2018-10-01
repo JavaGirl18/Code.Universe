@@ -43,13 +43,20 @@ padding:10px;
 
 
 class HomePage extends Component {
-
+state ={
+    redirect: false
+}
     handleSubmit = (event) => {
         event.preventDefault()
         this.props.findUserByEmail()
     }
 
     render() {
+        console.log("home page")
+        if (this.state.redirect) {
+            console.log('redirecting')
+            return <Redirect push to={'/'} />
+        }
         if (this.props.loggedInstate) {
             // return <Redirect to={`/users/${this.props.userId}`} />
         }
