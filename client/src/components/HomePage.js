@@ -17,6 +17,9 @@ position: relative;
 }
 `
 const Text = styled.div`
+display: grid;
+grid-template-columns:repeat(3, 1fr);
+grid-template-areas: 'left center right';
 position: absolute;
 color: white;
 margin-top:-280px;
@@ -43,20 +46,14 @@ padding:10px;
 
 
 class HomePage extends Component {
-state ={
-    redirect: false
-}
+
     handleSubmit = (event) => {
         event.preventDefault()
         this.props.findUserByEmail()
     }
 
     render() {
-        console.log("home page")
-        if (this.state.redirect) {
-            console.log('redirecting')
-            return <Redirect push to={'/'} />
-        }
+      
         if (this.props.loggedInstate) {
             // return <Redirect to={`/users/${this.props.userId}`} />
         }
@@ -65,14 +62,14 @@ state ={
 
             <div>
 
-                <Img>
-                    <img src='https://pre00.deviantart.net/c5fc/th/pre/f/2014/053/e/2/free_space_galaxy_texture_by_lyshastra-d77gh54.jpg' />
 
-                </Img>
-               <Text><center>May the Code Be With You</center>
-               <hr></hr>
-               <center> <h2><strong>Events for Coders. Explore Code.Universe</strong></h2></center>
-               </Text>
+                <div id="pic">
+ <div class="text" ><h1 id='mainText'>May the Code Be With You</h1></div>
+ <div class='text'><h2><strong>Events for Coders. Explore Code.Universe</strong></h2></div>
+                </div>
+
+              
+               
 
 
                 <center><Sign>

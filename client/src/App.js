@@ -10,7 +10,7 @@ import User from './components/ShowUser'
 import NewEvent from './components/NewEvent'
 import NewPost from './components/NewPost'
 import NewUser from './components/NewUser'
-import './App.css';
+import './style.css';
 
 
 
